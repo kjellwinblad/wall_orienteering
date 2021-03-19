@@ -15,7 +15,8 @@ enum MenuItemId {
 	DELETE_MODE,
 	SET_GROUND_SIZE,
 	SET_START_MODE,
-	SET_GOAL_MODE
+	SET_GOAL_MODE,
+	TO_MAIN_MENU
 }
 
 func _ready():
@@ -31,6 +32,7 @@ func _ready():
 	popup.add_item("Delete Mode", MenuItemId.DELETE_MODE)
 	popup.add_item("Clear All Walls", MenuItemId.CLEAR_WALLS)
 	popup.add_item("Clear All Controls", MenuItemId.CLEAR_CONTROLS)
+	popup.add_item("Exit to Main Menu", MenuItemId.TO_MAIN_MENU)
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 func _on_item_pressed(id):

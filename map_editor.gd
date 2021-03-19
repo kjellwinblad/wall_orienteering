@@ -24,6 +24,8 @@ onready var editor_menu : EditorMenu = $CanvasLayer/EditorMenu
 func _ready():
 	editor_menu.connect("id_pressed", self, "_on_menu_select")
 	editor_menu.connect("mouse_entered", self, "_on_menu_entered")
+	map_renderer.set_map(MapResource.new())
+	rerender_map()
 
 func _on_menu_select(id):
 	if id == editor_menu.MenuItemId.ADD_WALL:
@@ -55,6 +57,8 @@ func _on_menu_select(id):
 		state = EditorState.SET_START_STATE
 	if id == editor_menu.MenuItemId.SET_GOAL_MODE:
 		state = EditorState.SET_GOAL_STATE
+	if id == editor_menu.MenuItemId.TO_MAIN_MENU:
+		get_tree().change_scene("res://main_menu.tscn")
 
 func _on_menu_entered():
 	state = EditorState.SELECT_STATE

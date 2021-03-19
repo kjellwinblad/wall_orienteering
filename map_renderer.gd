@@ -26,6 +26,7 @@ func create_world() -> void:
 	floor_mesh.size.y = map.height
 	#_floor.create_trimesh_collision()
 	_floor.translate(Vector3(map.width/2, -map.height/2, 0))
+	_floor.create_trimesh_collision()
 	print(floor_mesh.size.y)
 	var index := 0
 	for wall_cords in map.walls:
