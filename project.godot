@@ -1,0 +1,64 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "MenuButton",
+"class": "EditorMenu",
+"language": "GDScript",
+"path": "res://editor_menu.gd"
+}, {
+"base": "Spatial",
+"class": "MapRenderer",
+"language": "GDScript",
+"path": "res://map_renderer.gd"
+}, {
+"base": "Resource",
+"class": "MapResource",
+"language": "GDScript",
+"path": "res://map_resource.gd"
+}, {
+"base": "Spatial",
+"class": "OControl",
+"language": "GDScript",
+"path": "res://ocontrol.gd"
+}, {
+"base": "Spatial",
+"class": "Wall",
+"language": "GDScript",
+"path": "res://wall.gd"
+} ]
+_global_script_class_icons={
+"EditorMenu": "",
+"MapRenderer": "",
+"MapResource": "",
+"OControl": "",
+"Wall": ""
+}
+
+[application]
+
+config/name="wall_ol"
+run/main_scene="res://main_menu.tscn"
+config/icon="res://icon.png"
+
+[input]
+
+left_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
+[rendering]
+
+quality/driver/driver_name="GLES2"
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
+environment/default_environment="res://default_env.tres"

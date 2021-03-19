@@ -1,0 +1,10 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://map_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+width = 10.0
+height = 10.0
+walls = [ [ Vector2( 5.1, 1.6 ), Vector2( 3.06667, 4.63333 ) ], [ Vector2( 5.05, 1.66667 ), Vector2( 7.6, 4.4 ) ], [ Vector2( 7.58333, 4.48333 ), Vector2( 3.23333, 4.61667 ) ] ]
+controlls = [  ]
