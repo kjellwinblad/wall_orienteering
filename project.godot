@@ -29,6 +29,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ocontrol.gd"
 }, {
+"base": "WindowDialog",
+"class": "SetSizeDialog",
+"language": "GDScript",
+"path": "res://set_size_dialog.gd"
+}, {
 "base": "Spatial",
 "class": "Wall",
 "language": "GDScript",
@@ -39,6 +44,7 @@ _global_script_class_icons={
 "MapRenderer": "",
 "MapResource": "",
 "OControl": "",
+"SetSizeDialog": "",
 "Wall": ""
 }
 

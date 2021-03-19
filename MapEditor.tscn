@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://map_renderer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://map_editor.gd" type="Script" id=2]
 [ext_resource path="res://editor_menu.gd" type="Script" id=3]
+[ext_resource path="res://set_size_dialog.gd" type="Script" id=4]
 
 [sub_resource type="CylinderMesh" id=1]
 top_radius = 0.1
@@ -74,7 +75,7 @@ margin_bottom = 315.0
 rect_min_size = Vector2( 500, 315 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-window_title = "Open a Map"
+window_title = "Open a File"
 resizable = true
 mode = 0
 current_dir = "res://maps"
@@ -83,5 +84,99 @@ current_path = "res://maps/new_map.tres"
 __meta__ = {
 "_editor_description_": ""
 }
+
+[node name="SetSizeDialog" type="WindowDialog" parent="."]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 100.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 200 )
+popup_exclusive = true
+window_title = "Set Size"
+resizable = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SetSizeDialog"]
+margin_right = 104.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 200, 200 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="SetSizeDialog/VBoxContainer"]
+margin_right = 200.0
+margin_bottom = 14.0
+text = "Set ground size"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SetSizeDialog/VBoxContainer"]
+margin_top = 18.0
+margin_right = 200.0
+margin_bottom = 42.0
+
+[node name="Label" type="Label" parent="SetSizeDialog/VBoxContainer/HBoxContainer"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+text = "Height (meters)"
+
+[node name="HeightLineEdit" type="LineEdit" parent="SetSizeDialog/VBoxContainer/HBoxContainer"]
+margin_left = 104.0
+margin_right = 162.0
+margin_bottom = 24.0
+text = "10"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SetSizeDialog/VBoxContainer"]
+margin_top = 46.0
+margin_right = 200.0
+margin_bottom = 70.0
+
+[node name="Label" type="Label" parent="SetSizeDialog/VBoxContainer/HBoxContainer2"]
+margin_top = 5.0
+margin_right = 96.0
+margin_bottom = 19.0
+text = "Width (meters)"
+
+[node name="WidthLineEdit" type="LineEdit" parent="SetSizeDialog/VBoxContainer/HBoxContainer2"]
+margin_left = 100.0
+margin_right = 158.0
+margin_bottom = 24.0
+text = "10"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SetSizeDialog/VBoxContainer"]
+margin_top = 74.0
+margin_right = 200.0
+margin_bottom = 94.0
+
+[node name="SaveButton" type="Button" parent="SetSizeDialog/VBoxContainer/HBoxContainer3"]
+margin_right = 41.0
+margin_bottom = 20.0
+text = "Save"
+
+[node name="CancelButton" type="Button" parent="SetSizeDialog/VBoxContainer/HBoxContainer3"]
+margin_left = 45.0
+margin_right = 99.0
+margin_bottom = 20.0
+text = "Cancel"
+
+[node name="BadHeightDialog" type="AcceptDialog" parent="SetSizeDialog"]
+margin_right = 83.0
+margin_bottom = 58.0
+dialog_text = "The height needs to be a positive integer"
+
+[node name="BadWidthtDialog" type="AcceptDialog" parent="SetSizeDialog"]
+margin_right = 83.0
+margin_bottom = 58.0
+dialog_text = "The width needs to be a positive integer"
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_SaveFileDialog_file_selected"]
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_OpenFileDialog_file_selected"]
+[connection signal="pressed" from="SetSizeDialog/VBoxContainer/HBoxContainer3/SaveButton" to="SetSizeDialog" method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="SetSizeDialog/VBoxContainer/HBoxContainer3/CancelButton" to="SetSizeDialog" method="_on_CancelButton_pressed"]

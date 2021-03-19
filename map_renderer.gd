@@ -7,6 +7,8 @@ export(Resource) onready var map = map as MapResource
 onready var _floor : MeshInstance = $WorldNodes/Floor
 onready var wall_scene = preload("res://Wall.tscn")
 onready var control_scene = preload("res://Control.tscn")
+onready var start_scene = preload("res://Start.tscn")
+onready var goal_scene = preload("res://Goal.tscn")
 onready var _world_nodes = $WorldNodes
 
 func set_map(init_map: MapResource):
@@ -50,6 +52,12 @@ func create_world() -> void:
 		control.control_index = index
 		index += 1
 		add_child(control)
+	var goal = goal_scene.instance()
+	goal.transform.origin = Vector3(map.goal_pos.x,0, map.goal_pos.y)
+	add_child(goal)
+	var start = start_scene.instance()
+	start.transform.origin = Vector3(map.start_pos.x,0, map.start_pos.y)
+	add_child(start)
 	var camera : Camera = $Camera
 	camera.size = max(map.width, map.height)
 	camera.translate(Vector3(map.width/2, -map.height/2, 0))

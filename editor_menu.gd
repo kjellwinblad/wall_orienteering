@@ -12,13 +12,19 @@ enum MenuItemId {
 	CLEAR_WALLS,
 	CLEAR_CONTROLS,
 	SELECT_MODE,
-	DELETE_MODE
+	DELETE_MODE,
+	SET_GROUND_SIZE,
+	SET_START_MODE,
+	SET_GOAL_MODE
 }
 
 func _ready():
 	var popup : PopupMenu = get_popup()
 	popup.add_item("Open...", MenuItemId.OPEN)
 	popup.add_item("Save As...", MenuItemId.SAVE)
+	popup.add_item("Set Ground Size", MenuItemId.SET_GROUND_SIZE)
+	popup.add_item("Set Start", MenuItemId.SET_START_MODE)
+	popup.add_item("Set Goal", MenuItemId.SET_GOAL_MODE)
 	popup.add_item("Select Mode", MenuItemId.SELECT_MODE)
 	popup.add_item("Add Wall Mode", MenuItemId.ADD_WALL)
 	popup.add_item("Add Control Mode", MenuItemId.ADD_CONTROL)

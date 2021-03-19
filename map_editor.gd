@@ -6,7 +6,9 @@ enum EditorState {
 	SELECT_STATE,
 	ADD_WALL_STATE,
 	DELETE_STATE,
-	ADD_CONTROL_STATE
+	ADD_CONTROL_STATE,
+	SET_START_STATE,
+	SET_GOAL_STATE
 }
 
 var state = EditorState.ADD_WALL_STATE
@@ -46,6 +48,13 @@ func _on_menu_select(id):
 	if id == editor_menu.MenuItemId.OPEN:
 		$OpenFileDialog.popup()
 		$OpenFileDialog.invalidate()
+	if id == editor_menu.MenuItemId.SET_GROUND_SIZE:
+		var set_size_dialog : SetSizeDialog = find_node("SetSizeDialog")
+		set_size_dialog.popup_with_map(map_renderer.get_map())
+	if id == editor_menu.MenuItemId.SET_START_MODE:
+		state = EditorState.SET_START_STATE
+	if id == editor_menu.MenuItemId.SET_GOAL_MODE:
+		state = EditorState.SET_GOAL_STATE
 
 func _on_menu_entered():
 	state = EditorState.SELECT_STATE
@@ -83,6 +92,18 @@ func handle_mouse_click_event(mouse_event:InputEventMouseButton):
 			handle_delete_click(mouse_event)
 		if state == EditorState.ADD_CONTROL_STATE:
 			handle_add_control_click(mouse_event)
+		if state == EditorState.SET_START_STATE:
+			handle_change_start_click(mouse_event)
+		if state == EditorState.SET_GOAL_STATE:
+			handle_change_goal_click(mouse_event)
+
+func handle_change_start_click(mouse_event:InputEventMouseButton):
+	map_renderer.get_map().start_pos = _mouse_pos
+	rerender_map()
+
+func handle_change_goal_click(mouse_event:InputEventMouseButton):
+	map_renderer.get_map().goal_pos = _mouse_pos
+	rerender_map()
 
 func handle_delete_click(mouse_event:InputEventMouseButton) -> void:
 	var collider= _ray_cast.get_collider()
@@ -127,7 +148,9 @@ func rerender_map():
 	old_renderer.queue_free()
 	map_renderer = new_renderer
 	camera = map_renderer.get_node("Camera")
+	map_renderer.get_map().connect("changed", self, "rerender_map")
 	add_child(new_renderer)
+	
 
 
 func _on_SaveFileDialog_file_selected(path):
