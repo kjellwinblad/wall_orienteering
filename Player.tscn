@@ -2,19 +2,21 @@
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=1]
 size = Vector3( 0.5, 2, 0.5 )
 
-[sub_resource type="CapsuleShape" id=3]
+[sub_resource type="CapsuleShape" id=2]
 radius = 0.5
 height = 1.5
 
 [node name="Player" type="KinematicBody"]
+collision_layer = 2147483650
+collision_mask = 2147483653
 script = ExtResource( 1 )
 mouse_sensetivity = 0.1
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
+mesh = SubResource( 1 )
 material/0 = null
 
 [node name="Camera" type="Camera" parent="."]
@@ -25,4 +27,4 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441648, -0.311752 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-shape = SubResource( 3 )
+shape = SubResource( 2 )

@@ -19,7 +19,6 @@ func look(event : InputEvent):
 		var camera : Camera = $Camera2
 		if camera.current:
 			camera.rotation_degrees.x += -1*pos.y * mouse_sensetivity
-			print(camera.rotation_degrees.x)
 			if camera.rotation_degrees.x > 80.0:
 				camera.rotation_degrees.x = 80.0
 			if camera.rotation_degrees.x <  -80.0:

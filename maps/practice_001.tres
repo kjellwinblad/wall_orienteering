@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://map_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+width = 10.0
+height = 10.0
+walls = [ [ Vector2( -0.0166669, 0.0166685 ), Vector2( 0.0166664, 9.95 ) ], [ Vector2( 0, 9.9 ), Vector2( 9.98333, 9.91667 ) ], [ Vector2( 9.95, 9.91667 ), Vector2( 9.98333, 0.0166685 ) ], [ Vector2( 9.91667, 0.0166685 ), Vector2( -0.0166669, 0.0500018 ) ], [ Vector2( 6.15, 1.46667 ), Vector2( 2.96667, 5 ) ], [ Vector2( 6.98333, 3.96667 ), Vector2( 3.7, 6.88333 ) ] ]
+controlls = [ Vector2( 1.4, 5.01667 ), Vector2( 4.85, 4.85 ), Vector2( 8.3, 4.08333 ) ]
+start_pos = Vector2( 1.73333, 1.55 )
+goal_pos = Vector2( 7.66667, 7.98334 )
+name = "Piece of Cake!"

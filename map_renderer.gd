@@ -2,6 +2,9 @@ extends Spatial
 
 class_name MapRenderer
 
+signal player_hit_goal
+signal player_hit_control
+
 export(Resource) onready var map = map as MapResource
 
 onready var _floor : MeshInstance = $WorldNodes/Floor
@@ -27,14 +30,17 @@ func create_world() -> void:
 	#_floor.create_trimesh_collision()
 	_floor.translate(Vector3(map.width/2, -map.height/2, 0))
 	_floor.create_trimesh_collision()
-	print(floor_mesh.size.y)
+	var wall_maker_width : float = max(0.1, max(map.width, map.height)/200)
+	var control_marker_with : float = max(0.1, max(map.width, map.height)/40)
 	var index := 0
+	print("walls", map.walls, map.controlls)
 	for wall_cords in map.walls:
 		var start: Vector2 = wall_cords[0]
 		var end: Vector2 = wall_cords[1]	
 		var wall: Wall = wall_scene.instance()
 		var wall_length = (wall_cords[0] - wall_cords[1]).length()
 		wall.length = wall_length
+		wall.marker_width = wall_maker_width
 		var angle = (start-end).angle_to(Vector2.RIGHT)
 		#wall.global_transform.origin = Vector3(start.x,0,start.y)
 		wall.look_at_from_position(Vector3(start.x,0, start.y),Vector3(end.x,0, end.y), Vector3.UP)
@@ -46,15 +52,19 @@ func create_world() -> void:
 		add_child(wall)
 		print(wall is Wall, wall.name)
 	index = 0
+	print(map.controlls)
 	for control_point in map.controlls:
 		control_point = control_point as Vector2
 		var control:OControl  = control_scene.instance()
+		control.size_on_map = control_marker_with
 		control.transform.origin = Vector3(control_point.x,0, control_point.y)
 		control.control_index = index
 		index += 1
+		control.connect("player_hit_control", self, "player_hit_control")
 		add_child(control)
 	var goal = goal_scene.instance()
 	goal.transform.origin = Vector3(map.goal_pos.x,0, map.goal_pos.y)
+	goal.connect("entered", self, "player_entered_goal")
 	add_child(goal)
 	var start = start_scene.instance()
 	start.transform.origin = Vector3(map.start_pos.x,0, map.start_pos.y)
@@ -63,3 +73,9 @@ func create_world() -> void:
 	camera.size = max(map.width, map.height)
 	camera.translate(Vector3(map.width/2, -map.height/2, 0))
 
+func player_hit_control(index: int):
+	print(index)
+	emit_signal("player_hit_control", index)
+
+func player_entered_goal():
+	emit_signal("player_hit_goal")

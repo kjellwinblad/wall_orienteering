@@ -5,12 +5,12 @@ class_name SetSizeDialog
 var map : MapResource = null
 
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func popup_with_map(map_p:MapResource):
 	map = map_p
 	find_node("HeightLineEdit").text = str(map.height)
-	find_node("WidthLineEdit").text = str(map.width)
+	find_node("NameEdit").text = map.name
 	popup()
 
 func _on_CancelButton_pressed():
@@ -28,5 +28,6 @@ func _on_SaveButton_pressed():
 		return
 	map.height = float(height_str)
 	map.width = float(width_str)
+	map.name = find_node("NameEdit").text
 	map.emit_signal("changed")
 	hide()

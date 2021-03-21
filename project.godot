@@ -54,6 +54,11 @@ config/name="wall_ol"
 run/main_scene="res://main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+SceneSwitcher="*res://scene_switcher.gd"
+MapGetter="*res://map_getter.gd"
+
 [input]
 
 left_click={
@@ -93,9 +98,15 @@ show_map={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Checkpoint"
+
 [rendering]
 
-quality/driver/driver_name="GLES2"
+quality/driver/fallback_to_gles2=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
 environment/default_environment="res://default_env.tres"

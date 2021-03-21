@@ -20,11 +20,13 @@ onready var map_renderer : MapRenderer = $MapRenderer
 onready var camera : Camera = $MapRenderer/Camera
 onready var map_renderer_scene = preload("map_renderer.tscn")
 onready var editor_menu : EditorMenu = $CanvasLayer/EditorMenu
+onready var properties_dialog : SetSizeDialog = find_node("PropertiesDialog")
 
 func _ready():
 	editor_menu.connect("id_pressed", self, "_on_menu_select")
 	editor_menu.connect("mouse_entered", self, "_on_menu_entered")
-	map_renderer.set_map(MapResource.new())
+	if SceneSwitcher.get_param("map"):
+		map_renderer.set_map(SceneSwitcher.get_param("map"))
 	rerender_map()
 
 func _on_menu_select(id):
@@ -51,8 +53,7 @@ func _on_menu_select(id):
 		$OpenFileDialog.popup()
 		$OpenFileDialog.invalidate()
 	if id == editor_menu.MenuItemId.SET_GROUND_SIZE:
-		var set_size_dialog : SetSizeDialog = find_node("SetSizeDialog")
-		set_size_dialog.popup_with_map(map_renderer.get_map())
+		properties_dialog.popup_with_map(map_renderer.get_map())
 	if id == editor_menu.MenuItemId.SET_START_MODE:
 		state = EditorState.SET_START_STATE
 	if id == editor_menu.MenuItemId.SET_GOAL_MODE:
@@ -86,7 +87,11 @@ func handle_mouse_motion_event(mouse_event:InputEventMouseMotion):
 	#_ray_cast.look_at_from_position(camera.project_ray_origin(mouse_event.position), mousePosition3D, Vector3.UP)
 	
 	#_ray_cast.cast_to = mousePosition3D
-	_pos_label.text = "x = " + str(_mouse_pos.x) + " y = " + str(_mouse_pos.y) + " is colid" + str(_ray_cast.is_colliding())
+	var colliding_body : StaticBody = _ray_cast.get_collider()
+	if colliding_body and colliding_body.get_parent():
+		if colliding_body.get_parent().get_parent() is Wall:
+			print("Wall")
+	_pos_label.text = "x = " + str(_mouse_pos.x) + " y = " + str(_mouse_pos.y) + " is colid" + str(_ray_cast.is_colliding()) + " "
 
 func handle_mouse_click_event(mouse_event:InputEventMouseButton):
 	if mouse_event.is_action_pressed("left_click"):
@@ -110,7 +115,7 @@ func handle_change_goal_click(mouse_event:InputEventMouseButton):
 	rerender_map()
 
 func handle_delete_click(mouse_event:InputEventMouseButton) -> void:
-	var collider= _ray_cast.get_collider()
+	var collider = _ray_cast.get_collider()
 	print("colider", collider)
 	if collider:
 		var curr: Node = collider
@@ -129,9 +134,7 @@ func handle_delete_click(mouse_event:InputEventMouseButton) -> void:
 			var controls : Array = map_renderer.get_map().controlls
 			var control = item as OControl
 			controls.remove(control.control_index)
-		rerender_map()
-		
-
+		rerender_map()	
 
 func handle_add_wall_click(mouse_event:InputEventMouseButton):
 	if _click_one == Vector2.INF:
@@ -154,8 +157,6 @@ func rerender_map():
 	camera = map_renderer.get_node("Camera")
 	map_renderer.get_map().connect("changed", self, "rerender_map")
 	add_child(new_renderer)
-	
-
 
 func _on_SaveFileDialog_file_selected(path):
 	map_renderer.get_map().save(path)
