@@ -31,7 +31,7 @@ func create_world() -> void:
 	_floor.translate(Vector3(map.width/2, -map.height/2, 0))
 	_floor.create_trimesh_collision()
 	var wall_maker_width : float = max(0.1, max(map.width, map.height)/200)
-	var control_marker_with : float = max(0.1, max(map.width, map.height)/40)
+	var control_marker_with : float = max(0.1, max(map.width, map.height)/20)
 	var index := 0
 	print("walls", map.walls, map.controlls)
 	for wall_cords in map.walls:

@@ -1,0 +1,77 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://practice_completed.gd" type="Script" id=1]
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/montreal/Montreal-Bold.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 48
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 28
+font_data = ExtResource( 2 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 1.18921
+margin_bottom = 1.18921
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 60.0
+
+[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
+margin_left = 260.0
+margin_right = 763.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 1 )
+text = "Practice Completed!"
+
+[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+margin_top = 64.0
+margin_right = 1024.0
+margin_bottom = 104.0
+columns = 2
+
+[node name="Label3" type="Label" parent="VBoxContainer/GridContainer"]
+margin_right = 89.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 2 )
+text = "Time:"
+
+[node name="TimeLabel" type="Label" parent="VBoxContainer/GridContainer"]
+margin_left = 93.0
+margin_right = 179.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 2 )
+text = "0:0:0"
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 108.0
+margin_right = 1024.0
+margin_bottom = 147.0
+
+[node name="Button" type="Button" parent="VBoxContainer/CenterContainer2"]
+margin_left = 436.0
+margin_right = 588.0
+margin_bottom = 39.0
+custom_fonts/font = SubResource( 3 )
+text = "Main Menu"
+[connection signal="pressed" from="VBoxContainer/CenterContainer2/Button" to="." method="_on_Button_pressed"]

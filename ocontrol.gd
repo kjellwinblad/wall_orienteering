@@ -12,6 +12,8 @@ var control_index = 42
 
 onready var marker : MeshInstance = $MapFace
 
+onready var beep_player: AudioStreamPlayer = $BeepAudioStreamPlayer
+
 var mouse_hover_material = preload("res://purple_material.tres")
 
 func _ready():
@@ -31,4 +33,6 @@ func _mouse_exited():
 
 
 func _on_Area_body_entered(body):
+	find_node("MapFaceTaken").visible = true
 	emit_signal("player_hit_control", control_index)
+	beep_player.play()

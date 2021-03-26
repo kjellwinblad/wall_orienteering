@@ -1,8 +1,12 @@
 extends Spatial
 
 onready var map_renderer_scene = preload("map_renderer.tscn")
-onready var info_label :Label = find_node("InfoLabel")
+onready var info_label : Label = find_node("InfoLabel")
+onready var start_time : int = OS.get_system_time_msecs()
+onready var time_label : Label = find_node("TimeLabel")
 var controls = []
+var route: RacePathResouce = RacePathResouce.new()
+var player: Node = find_node("Player")
 
 enum GameState {
 	SHOW_MAP,
@@ -44,6 +48,7 @@ func entered_goal():
 	if all_controls_taken():
 		info_label.visible = true
 		info_label.text = "All Controls Taken!"
+		SceneSwitcher.change_scene("res://PracticeCompleted.tscn", {"time": elapsed_time()})
 	else:
 		info_label.text = "You have not taken all controls!\n(Press space to see which one you have missed)"
 		info_label.visible = true
@@ -57,3 +62,15 @@ func load_map(map):
 	var new_renderer = map_renderer_scene.instance()
 	new_renderer.set_map(map)
 	add_child(new_renderer)
+
+func elapsed_time() -> int:
+	return (OS.get_system_time_msecs() - start_time)
+
+func _on_Timer_timeout():
+	var time := elapsed_time()
+	time_label.text = HelperFuncs.elapsedTimeMicrosecondToTimeString(time)
+	
+
+
+func _on_StorePathTimer_timeout():
+	route.add_point(elapsed_time(), player.global_transform.origin)

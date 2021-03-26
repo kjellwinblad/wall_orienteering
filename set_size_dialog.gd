@@ -10,6 +10,7 @@ func _ready():
 func popup_with_map(map_p:MapResource):
 	map = map_p
 	find_node("HeightLineEdit").text = str(map.height)
+	find_node("WidthLineEdit").text = str(map.width)
 	find_node("NameEdit").text = map.name
 	popup()
 

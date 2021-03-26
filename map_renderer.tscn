@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://map_renderer.gd" type="Script" id=1]
 [ext_resource path="res://maps/map1.tres" type="Resource" id=2]
@@ -7,17 +7,10 @@
 [ext_resource path="res://GroundTexture/Ground037_1K_Roughness.jpg" type="Texture" id=5]
 [ext_resource path="res://GroundTexture/Ground037_1K_Color.jpg" type="Texture" id=6]
 
-[sub_resource type="SpatialMaterial" id=1]
-albedo_color = Color( 0.866667, 0, 0, 1 )
-
-[sub_resource type="SphereMesh" id=2]
-material = SubResource( 1 )
-radius = 0.1
-
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 1, 0.3 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_texture = ExtResource( 6 )
 roughness_texture = ExtResource( 5 )
 normal_enabled = true
@@ -40,15 +33,6 @@ projection = 1
 current = true
 size = 12.0
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="MeshInstance2" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 10 )
-mesh = SubResource( 2 )
-material/0 = null
-
 [node name="Camera2" type="Camera" parent="."]
 transform = Transform( 0.856718, 0, -0.515786, 0, 1, 0, 0.515786, 0, 0.856718, 0, 0, 13.1646 )
 projection = 1
@@ -58,8 +42,8 @@ size = 10.0
 
 [node name="Floor" type="MeshInstance" parent="WorldNodes"]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.703506, -0.649207, -0.289154, 0, -0.406864, 0.913489, -0.710689, -0.642645, -0.286231, 0, 14.3837, -7.42455 )

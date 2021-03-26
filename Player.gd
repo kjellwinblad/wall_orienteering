@@ -7,6 +7,9 @@ const turn_speed : float = 3.0
 const forward_speed: float = 8.0
 export(float) var mouse_sensetivity = 20000
 
+onready var run_sound_player = $AudioStreamPlayer
+var is_playing_run_sound = false
+
 func _input(event):
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	look(event)
@@ -40,6 +43,8 @@ func _physics_process(delta):
 		rotate_y(-turn_speed*delta)
 	if Input.is_action_pressed("move_forward"):
 		direction.z -= 1
+	if Input.is_action_pressed("move_backwards"):
+		direction.z += 1
 	if Input.is_action_pressed("move_left"):
 		direction.x -= 1
 	if Input.is_action_pressed("move_right"):
@@ -54,4 +59,11 @@ func _physics_process(delta):
 		speed.y -= gravity * delta
 	else:
 		speed.y = -0.01
+	if (direction.x != 0 or direction.z != 0):
+		if not is_playing_run_sound:
+			run_sound_player.play()
+			is_playing_run_sound = true
+	else:
+		run_sound_player.stop()
+		is_playing_run_sound = false
 	move_and_slide(direction, Vector3.UP)

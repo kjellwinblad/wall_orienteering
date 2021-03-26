@@ -11,16 +11,17 @@ enum EditorState {
 	SET_GOAL_STATE
 }
 
-var state = EditorState.ADD_WALL_STATE
+var state = EditorState.SELECT_STATE
 var _mouse_pos := Vector2()
 var _click_one := Vector2.INF
 onready var _ray_cast : RayCast = $MeshInstance/RayCast
-onready var _pos_label = $CanvasLayer/PosLabel
+onready var _pos_label = find_node("PosLabel")
 onready var map_renderer : MapRenderer = $MapRenderer
 onready var camera : Camera = $MapRenderer/Camera
 onready var map_renderer_scene = preload("map_renderer.tscn")
-onready var editor_menu : EditorMenu = $CanvasLayer/EditorMenu
+onready var editor_menu : EditorMenu = find_node("EditorMenu")
 onready var properties_dialog : SetSizeDialog = find_node("PropertiesDialog")
+onready var help_label: Label = find_node("HelpLabel")
 
 func _ready():
 	editor_menu.connect("id_pressed", self, "_on_menu_select")
@@ -32,14 +33,18 @@ func _ready():
 func _on_menu_select(id):
 	if id == editor_menu.MenuItemId.ADD_WALL:
 		state = EditorState.ADD_WALL_STATE
-	if id == editor_menu.MenuItemId.ADD_WALL:
-		state = EditorState.ADD_WALL_STATE
+		help_label.text = "[Add Wall Mode] Make one click where the wall should start and one click where it should end"
+		return
 	if id == editor_menu.MenuItemId.SELECT_MODE:
 		state = EditorState.SELECT_STATE
 	if id == editor_menu.MenuItemId.DELETE_MODE:
 		state = EditorState.DELETE_STATE
+		help_label.text = "[Remove Mode] Click on item to remove"
+		return
 	if id == editor_menu.MenuItemId.ADD_CONTROL:
 		state = EditorState.ADD_CONTROL_STATE
+		help_label.text = "[Add Control Mode] Click to place control"
+		return
 	if id == editor_menu.MenuItemId.CLEAR_WALLS:
 		map_renderer.get_map().walls = []
 		rerender_map()
@@ -56,10 +61,15 @@ func _on_menu_select(id):
 		properties_dialog.popup_with_map(map_renderer.get_map())
 	if id == editor_menu.MenuItemId.SET_START_MODE:
 		state = EditorState.SET_START_STATE
+		help_label.text = "[Set Start Location Mode] Click to select start location"
+		return
 	if id == editor_menu.MenuItemId.SET_GOAL_MODE:
 		state = EditorState.SET_GOAL_STATE
+		help_label.text = "[Set Goal Location Mode] Click to select goal location"
+		return
 	if id == editor_menu.MenuItemId.TO_MAIN_MENU:
 		get_tree().change_scene("res://main_menu.tscn")
+	help_label.text = ""
 
 func _on_menu_entered():
 	state = EditorState.SELECT_STATE
@@ -74,6 +84,12 @@ func _input(event):
 		handle_mouse_motion_event(mouse_motion_event)
 	if mouse_click_event:
 		handle_mouse_click_event(mouse_click_event)
+	if Input.is_action_just_pressed("add_control"):
+		editor_menu.emit_signal("id_pressed", editor_menu.MenuItemId.ADD_CONTROL)
+	if Input.is_action_just_pressed("add_wall"):
+		editor_menu.emit_signal("id_pressed", editor_menu.MenuItemId.ADD_WALL)
+	if Input.is_action_just_pressed("delete"):
+		editor_menu.emit_signal("id_pressed", editor_menu.MenuItemId.DELETE_MODE)
 
 func handle_mouse_motion_event(mouse_event:InputEventMouseMotion):
 	var dropPlane  = Plane(Vector3(0,0,0), Vector3(10,0,0), Vector3(10,0,10))
@@ -91,7 +107,7 @@ func handle_mouse_motion_event(mouse_event:InputEventMouseMotion):
 	if colliding_body and colliding_body.get_parent():
 		if colliding_body.get_parent().get_parent() is Wall:
 			print("Wall")
-	_pos_label.text = "x = " + str(_mouse_pos.x) + " y = " + str(_mouse_pos.y) + " is colid" + str(_ray_cast.is_colliding()) + " "
+	_pos_label.text = "x = " + str(_mouse_pos.x) + " y = " + str(_mouse_pos.y)
 
 func handle_mouse_click_event(mouse_event:InputEventMouseButton):
 	if mouse_event.is_action_pressed("left_click"):
