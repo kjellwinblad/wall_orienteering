@@ -13,3 +13,6 @@ func get_param(name):
 	if _params != null and _params.has(name):
 		return _params[name]
 	return null
+
+func clear_params():
+	_params = null

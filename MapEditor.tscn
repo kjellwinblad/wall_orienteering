@@ -6,84 +6,127 @@
 [ext_resource path="res://set_size_dialog.gd" type="Script" id=4]
 [ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans.ttf" type="DynamicFontData" id=5]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=1]
 
-[sub_resource type="Theme" id=4]
-MenuButton/styles/ = SubResource( 3 )
+[sub_resource type="Theme" id=2]
+MenuButton/styles/ = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 font_data = ExtResource( 5 )
 
-[sub_resource type="CylinderMesh" id=1]
+[sub_resource type="CylinderMesh" id=4]
 top_radius = 0.1
 bottom_radius = 0.1
 height = 100.0
 
-[node name="MapEditor" type="Spatial"]
-script = ExtResource( 2 )
-
-[node name="MapRenderer" parent="." instance=ExtResource( 1 )]
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-anchor_top = 1.0
+[node name="Control" type="Control"]
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -40.0
-margin_right = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PosLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 14.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HelpLabel" type="Label" parent="CanvasLayer/VBoxContainer"]
-margin_top = 18.0
-margin_right = 40.0
-margin_bottom = 32.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 46.0
 
-[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer"]
-margin_right = 67.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
 margin_bottom = 39.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="EditorMenu" type="MenuButton" parent="CanvasLayer/PanelContainer"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 60.0
+[node name="EditorMenu" type="MenuButton" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+margin_right = 53.0
 margin_bottom = 32.0
-theme = SubResource( 4 )
-custom_fonts/font = SubResource( 2 )
+theme = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "menu"
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/PanelContainer/HBoxContainer"]
+margin_left = 57.0
+margin_right = 57.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PosLabel" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_bottom = 14.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HelpLabel" type="Label" parent="VBoxContainer/PanelContainer/HBoxContainer/VBoxContainer"]
+margin_top = 18.0
+margin_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportCenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 50.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/ViewportCenterContainer"]
+margin_left = 312.0
+margin_top = 75.0
+margin_right = 712.0
+margin_bottom = 475.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer"]
+size = Vector2( 400, 400 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="MapEditor" type="Spatial" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport"]
+
+[node name="MapRenderer" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport/MapEditor" instance=ExtResource( 1 )]
+
+[node name="MeshInstance" type="MeshInstance" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport/MapEditor"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 5, 5 )
-mesh = SubResource( 1 )
+mesh = SubResource( 4 )
 material/0 = null
 
-[node name="RayCast" type="RayCast" parent="MeshInstance"]
+[node name="RayCast" type="RayCast" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport/MapEditor/MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 98.3332, 0 )
 enabled = true
 exclude_parent = false
 cast_to = Vector3( 0, -1000, 0 )
 
 [node name="SaveFileDialog" type="FileDialog" parent="."]
-margin_right = 500.0
-margin_bottom = 315.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -157.5
+margin_right = 250.0
+margin_bottom = 157.5
 rect_min_size = Vector2( 500, 315 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -93,8 +136,14 @@ current_file = "new_map.tres"
 current_path = "res://maps/new_map.tres"
 
 [node name="OpenFileDialog" type="FileDialog" parent="."]
-margin_right = 500.0
-margin_bottom = 315.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -157.5
+margin_right = 250.0
+margin_bottom = 157.5
 rect_min_size = Vector2( 500, 315 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -108,16 +157,27 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="IncorrectMapFileDialog" type="AcceptDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -257.0
+margin_top = -33.0
+margin_right = 257.0
+margin_bottom = 25.0
+dialog_text = "The fle you have selected is not a Wall OL map file. Please select another file."
+
 [node name="PropertiesDialog" type="WindowDialog" parent="."]
 visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 300.0
-margin_bottom = 300.0
+margin_left = -190.0
+margin_top = -115.5
+margin_right = 190.0
+margin_bottom = 115.5
 rect_min_size = Vector2( 200, 200 )
 popup_exclusive = true
 window_title = "Properties"
@@ -216,6 +276,7 @@ dialog_text = "The height needs to be a positive integer"
 margin_right = 83.0
 margin_bottom = 58.0
 dialog_text = "The width needs to be a positive integer"
+[connection signal="resized" from="VBoxContainer/ViewportCenterContainer" to="." method="_on_ViewportCenterContainer_resized"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_SaveFileDialog_file_selected"]
 [connection signal="file_selected" from="OpenFileDialog" to="." method="_on_OpenFileDialog_file_selected"]
 [connection signal="pressed" from="PropertiesDialog/VBoxContainer/HBoxContainer3/SaveButton" to="PropertiesDialog" method="_on_SaveButton_pressed"]

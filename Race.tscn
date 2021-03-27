@@ -1,15 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans-Bold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://race.gd" type="Script" id=2]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://ExitRaceDialog.gd" type="Script" id=5]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=2]
 size = 30
 font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 22
+font_data = ExtResource( 4 )
 
 [node name="Race" type="Spatial"]
 script = ExtResource( 2 )
@@ -26,34 +32,86 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="InfoLabelCenterContainer" type="CenterContainer" parent="Control"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/CenterContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/InfoLabelCenterContainer"]
 margin_left = 512.0
 margin_top = 300.0
 margin_right = 512.0
 margin_bottom = 300.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 
-[node name="InfoLabel" type="Label" parent="Control/CenterContainer/PanelContainer"]
-visible = false
+[node name="InfoLabel" type="Label" parent="Control/InfoLabelCenterContainer/PanelContainer"]
 margin_right = 48.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "Hej"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ExitRaceDialog" type="CenterContainer" parent="Control"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/ExitRaceDialog"]
+margin_left = 512.0
+margin_top = 300.0
+margin_right = 512.0
+margin_bottom = 300.0
+custom_styles/panel = SubResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/ExitRaceDialog/PanelContainer"]
+margin_right = 138.0
+margin_bottom = 73.0
+
+[node name="ExitRaceLabel" type="Label" parent="Control/ExitRaceDialog/PanelContainer/VBoxContainer"]
+margin_right = 138.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 2 )
+text = "Exit race?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="Control/ExitRaceDialog/PanelContainer/VBoxContainer"]
+margin_top = 40.0
+margin_right = 138.0
+margin_bottom = 73.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer"]
+margin_left = 23.0
+margin_right = 114.0
+margin_bottom = 33.0
+
+[node name="ExitRaceButton" type="Button" parent="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_right = 46.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+text = "Yes"
+
+[node name="CancelExitRaceButton" type="Button" parent="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer"]
+margin_left = 50.0
+margin_right = 91.0
+margin_bottom = 33.0
+custom_fonts/font = SubResource( 3 )
+text = "No"
+
 [node name="PanelContainer2" type="PanelContainer" parent="Control"]
 margin_right = 48.0
 margin_bottom = 36.0
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -61,7 +119,7 @@ __meta__ = {
 [node name="TimeLabel" type="Label" parent="Control/PanelContainer2"]
 margin_right = 103.0
 margin_bottom = 36.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 2 )
 text = "0:00:00"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -74,5 +132,7 @@ autostart = true
 [node name="StorePathTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+[connection signal="pressed" from="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer/ExitRaceButton" to="Control/ExitRaceDialog" method="_on_ExitRaceButton_pressed"]
+[connection signal="pressed" from="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer/CancelExitRaceButton" to="." method="_on_CancelExitRaceButton_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="timeout" from="StorePathTimer" to="." method="_on_StorePathTimer_timeout"]

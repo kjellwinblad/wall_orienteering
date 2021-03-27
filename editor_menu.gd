@@ -4,6 +4,8 @@ class_name EditorMenu
 
 signal id_pressed
 
+var snap_to_meters = false
+
 enum MenuItemId {
 	SAVE,
 	OPEN,
@@ -16,7 +18,8 @@ enum MenuItemId {
 	SET_GROUND_SIZE,
 	SET_START_MODE,
 	SET_GOAL_MODE,
-	TO_MAIN_MENU
+	TO_MAIN_MENU,
+	SNAP_TO_METERS
 }
 
 func _ready():
@@ -38,15 +41,22 @@ func _ready():
 	popup.add_shortcut(shortcut,MenuItemId.ADD_WALL, true)
 	popup.add_item("Add Control Mode (Ctrl+E)", MenuItemId.ADD_CONTROL)
 	popup.add_separator()
-	popup.add_item("Remoce Mode (Ctrl+R)", MenuItemId.DELETE_MODE)
+	popup.add_item("Remove Mode (Ctrl+R)", MenuItemId.DELETE_MODE)
 	popup.add_separator()
 	popup.add_item("Clear All Walls", MenuItemId.CLEAR_WALLS)
 	popup.add_item("Clear All Controls", MenuItemId.CLEAR_CONTROLS)
+	popup.add_separator()
+	popup.add_check_item("Snap to meters", MenuItemId.SNAP_TO_METERS)
+	popup.set_item_checked(MenuItemId.SNAP_TO_METERS, snap_to_meters)
 	popup.add_separator()
 	popup.add_item("Exit to Main Menu", MenuItemId.TO_MAIN_MENU)
 	popup.connect("id_pressed", self, "_on_item_pressed")
 
 func _on_item_pressed(id):
 	var popup : PopupMenu = get_popup()
-	emit_signal("id_pressed", id)
-	print(popup.get_item_text(id), " pressed", id)
+	if id == MenuItemId.SNAP_TO_METERS:
+		snap_to_meters = not snap_to_meters
+		popup.set_item_checked(MenuItemId.SNAP_TO_METERS, snap_to_meters)
+	else:
+		emit_signal("id_pressed", id)
+

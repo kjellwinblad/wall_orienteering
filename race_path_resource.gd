@@ -9,7 +9,7 @@ export(Array, int) var times = []
 func _init():
 	points.clear()
 	times.clear()
-	.init()
+	._init()
 
 func add_point(time: int, location: Vector2):
 	points.append(location)

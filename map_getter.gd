@@ -3,6 +3,7 @@ extends Node
 func get_practce_maps() -> Array:
 	var maps_dir : String = "res:///maps/"
 	var map_files = list_files_in_directory(maps_dir)
+	map_files.sort()
 	var practice_maps = []
 	for f in map_files:
 		var file_name :String = f

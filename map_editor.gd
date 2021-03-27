@@ -1,4 +1,4 @@
-extends Spatial
+extends Control
 
 
 
@@ -14,26 +14,34 @@ enum EditorState {
 var state = EditorState.SELECT_STATE
 var _mouse_pos := Vector2()
 var _click_one := Vector2.INF
-onready var _ray_cast : RayCast = $MeshInstance/RayCast
+var entered_item = null
+onready var _ray_cast : RayCast = find_node("RayCast")
 onready var _pos_label = find_node("PosLabel")
-onready var map_renderer : MapRenderer = $MapRenderer
-onready var camera : Camera = $MapRenderer/Camera
+onready var map_renderer : MapRenderer = find_node("MapRenderer")
+onready var camera : Camera = find_node("Camera")
 onready var map_renderer_scene = preload("map_renderer.tscn")
 onready var editor_menu : EditorMenu = find_node("EditorMenu")
 onready var properties_dialog : SetSizeDialog = find_node("PropertiesDialog")
 onready var help_label: Label = find_node("HelpLabel")
+onready var viewport: Viewport = find_node("Viewport")
+onready var viewport_center_container = find_node("ViewportCenterContainer")
+onready var viewport_container = find_node("ViewportContainer")
 
 func _ready():
 	editor_menu.connect("id_pressed", self, "_on_menu_select")
 	editor_menu.connect("mouse_entered", self, "_on_menu_entered")
 	if SceneSwitcher.get_param("map"):
 		map_renderer.set_map(SceneSwitcher.get_param("map"))
+	print(viewport_center_container.rect_size)
+	viewport.size = viewport_center_container.rect_size
+	viewport_container.rect_size = viewport_center_container.rect_size
+	viewport_container.rect_min_size = viewport_center_container.rect_size
 	rerender_map()
 
 func _on_menu_select(id):
 	if id == editor_menu.MenuItemId.ADD_WALL:
 		state = EditorState.ADD_WALL_STATE
-		help_label.text = "[Add Wall Mode] Make one click where the wall should start and one click where it should end"
+		help_label.text = "[Add Wall Mode] Make one click where the wall shall start and one click where it shall end"
 		return
 	if id == editor_menu.MenuItemId.SELECT_MODE:
 		state = EditorState.SELECT_STATE
@@ -52,11 +60,13 @@ func _on_menu_select(id):
 		map_renderer.get_map().controlls = []
 		rerender_map()
 	if id == editor_menu.MenuItemId.SAVE:
-		$SaveFileDialog.popup()
-		$SaveFileDialog.invalidate()
+		find_node("SaveFileDialog").invalidate()
+		find_node("SaveFileDialog").popup()
+		find_node("SaveFileDialog").invalidate()
 	if id == editor_menu.MenuItemId.OPEN:
-		$OpenFileDialog.popup()
-		$OpenFileDialog.invalidate()
+		find_node("OpenFileDialog").invalidate()
+		find_node("OpenFileDialog").popup()
+		find_node("OpenFileDialog").invalidate()
 	if id == editor_menu.MenuItemId.SET_GROUND_SIZE:
 		properties_dialog.popup_with_map(map_renderer.get_map())
 	if id == editor_menu.MenuItemId.SET_START_MODE:
@@ -69,10 +79,12 @@ func _on_menu_select(id):
 		return
 	if id == editor_menu.MenuItemId.TO_MAIN_MENU:
 		get_tree().change_scene("res://main_menu.tscn")
+		self.queue_free()
 	help_label.text = ""
 
 func _on_menu_entered():
 	state = EditorState.SELECT_STATE
+	help_label.text = ""
 
 func _on_add_wall_pressed():
 	state = EditorState.ADD_WALL_STATE
@@ -93,22 +105,37 @@ func _input(event):
 
 func handle_mouse_motion_event(mouse_event:InputEventMouseMotion):
 	var dropPlane  = Plane(Vector3(0,0,0), Vector3(10,0,0), Vector3(10,0,10))
+	var mouse_pos_map_viewport = viewport.get_mouse_position()
 	var mousePosition3D = dropPlane.intersects_ray(
-							 camera.project_ray_origin(mouse_event.position),
-							 camera.project_ray_normal(mouse_event.position))
-	_mouse_pos = Vector2(mousePosition3D.x, mousePosition3D.z)
-	$MeshInstance.transform.origin = mousePosition3D
+							 camera.project_ray_origin(mouse_pos_map_viewport),
+							 camera.project_ray_normal(mouse_pos_map_viewport))
+	if editor_menu.snap_to_meters:
+		_mouse_pos = Vector2(round(mousePosition3D.x), round(mousePosition3D.z))
+	else:
+		_mouse_pos = Vector2(mousePosition3D.x, mousePosition3D.z)
+	find_node("MeshInstance").transform.origin = mousePosition3D
 	#_ray_cast.enabled = true
 	#_ray_cast.transform.origin = camera.project_ray_origin(mouse_event.position)
 	#_ray_cast.look_at_from_position(camera.project_ray_origin(mouse_event.position), mousePosition3D, Vector3.UP)
 	
 	#_ray_cast.cast_to = mousePosition3D
 	var colliding_body : StaticBody = _ray_cast.get_collider()
-	if colliding_body and colliding_body.get_parent():
-		if colliding_body.get_parent().get_parent() is Wall:
-			print("Wall")
+	var item = item_from_colliding_body(colliding_body)
+	if entered_item:
+		entered_item._mouse_exited()
+	if item:
+		entered_item = item
+		item._mouse_entered()
 	_pos_label.text = "x = " + str(_mouse_pos.x) + " y = " + str(_mouse_pos.y)
 
+func item_from_colliding_body(colliding_body : StaticBody):
+	if not colliding_body:
+		return null
+	var curr: Node = colliding_body
+	while curr != null and not (curr is Wall or curr is OControl):
+		curr = curr.get_parent()
+	return curr
+			
 func handle_mouse_click_event(mouse_event:InputEventMouseButton):
 	if mouse_event.is_action_pressed("left_click"):
 		if state == EditorState.ADD_WALL_STATE:
@@ -171,17 +198,29 @@ func rerender_map():
 	old_renderer.queue_free()
 	map_renderer = new_renderer
 	camera = map_renderer.get_node("Camera")
+	print("before add", map_renderer.map.name)
 	map_renderer.get_map().connect("changed", self, "rerender_map")
-	add_child(new_renderer)
+	viewport.add_child(new_renderer)
 
 func _on_SaveFileDialog_file_selected(path):
 	map_renderer.get_map().save(path)
-	var save_dialog : FileDialog = $SaveFileDialog
+	var save_dialog : FileDialog = find_node("SaveFileDialog")
 	save_dialog.update()
 
 
 func _on_OpenFileDialog_file_selected(path):
-	map_renderer.map = MapResource.new()
-	print(path)
-	map_renderer.map = load(path)
-	rerender_map()
+	SceneSwitcher.clear_params()
+	var map_resource = load(path)
+	if map_resource is MapResource:
+		map_renderer.map = map_resource
+		print("rerender", map_renderer.map.name)
+		rerender_map()
+	else:
+		find_node("IncorrectMapFileDialog").popup()
+
+
+func _on_ViewportCenterContainer_resized():
+	viewport.size = viewport_center_container.rect_size
+	viewport_container.rect_size = viewport_center_container.rect_size
+	viewport_container.rect_min_size = viewport_center_container.rect_size
+	print("changed_size", viewport_center_container.rect_size)

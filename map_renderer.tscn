@@ -1,7 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://map_renderer.gd" type="Script" id=1]
-[ext_resource path="res://maps/map1.tres" type="Resource" id=2]
+[ext_resource path="res://maps/practice_001.tres" type="Resource" id=2]
 [ext_resource path="res://GroundTexture/Ground037_1K_AmbientOcclusion.jpg" type="Texture" id=3]
 [ext_resource path="res://GroundTexture/Ground037_1K_Normal.jpg" type="Texture" id=4]
 [ext_resource path="res://GroundTexture/Ground037_1K_Roughness.jpg" type="Texture" id=5]
@@ -22,6 +22,9 @@ ao_texture = ExtResource( 3 )
 ao_on_uv2 = false
 ao_texture_channel = 0
 uv1_triplanar = true
+
+[sub_resource type="SpatialMaterial" id=3]
+vertex_color_use_as_albedo = true
 
 [node name="MapRenderer" type="Spatial"]
 script = ExtResource( 1 )
@@ -49,3 +52,6 @@ material/0 = SubResource( 2 )
 transform = Transform( 0.703506, -0.649207, -0.289154, 0, -0.406864, 0.913489, -0.710689, -0.642645, -0.286231, 0, 14.3837, -7.42455 )
 shadow_bias = 0.05
 shadow_contact = 0.32
+
+[node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
+material_override = SubResource( 3 )

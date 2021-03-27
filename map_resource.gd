@@ -12,6 +12,11 @@ export(Vector2) var start_pos:Vector2 = Vector2(3,3)
 export(Vector2) var goal_pos:Vector2 = Vector2(97,97)
 export(String) var name : String = "New Map"
 
+func _init():
+	._init()
+	walls = []
+	controlls = []
+
 func add_wall(from: Vector2, to: Vector2):
 	walls.append([from, to])
 	emit_signal("changed")

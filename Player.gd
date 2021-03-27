@@ -10,8 +10,10 @@ export(float) var mouse_sensetivity = 20000
 onready var run_sound_player = $AudioStreamPlayer
 var is_playing_run_sound = false
 
-func _input(event):
+func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _input(event):
 	look(event)
 
 func look(event : InputEvent):
@@ -59,11 +61,17 @@ func _physics_process(delta):
 		speed.y -= gravity * delta
 	else:
 		speed.y = -0.01
-	if (direction.x != 0 or direction.z != 0):
+	if Vector2(direction.x, direction.z).length() > 2:
 		if not is_playing_run_sound:
-			run_sound_player.play()
 			is_playing_run_sound = true
+			run_sound_player.play()
 	else:
-		run_sound_player.stop()
-		is_playing_run_sound = false
+		if is_playing_run_sound:
+			is_playing_run_sound = false
+			run_sound_player.stop()
 	move_and_slide(direction, Vector3.UP)
+
+
+func _on_AudioStreamPlayer_finished():
+	if is_playing_run_sound:
+		run_sound_player.play()

@@ -6,24 +6,49 @@ signal player_hit_goal
 signal player_hit_control
 
 export(Resource) onready var map = map as MapResource
+export(Resource) onready var run_path = run_path as RacePathResouce
 
-onready var _floor : MeshInstance = $WorldNodes/Floor
+
+onready var _floor : MeshInstance = find_node("Floor")
 onready var wall_scene = preload("res://Wall.tscn")
 onready var control_scene = preload("res://Control.tscn")
 onready var start_scene = preload("res://Start.tscn")
 onready var goal_scene = preload("res://Goal.tscn")
 onready var _world_nodes = $WorldNodes
+onready var ig:ImmediateGeometry = find_node("ImmediateGeometry")
+
+
 
 func set_map(init_map: MapResource):
 	map = init_map
 
 func _ready():
+	if SceneSwitcher.get_param("race_path"):
+		run_path = SceneSwitcher.get_param("race_path")
+	if SceneSwitcher.get_param("map"):
+		map = SceneSwitcher.get_param("map")
 	create_world()
 
 func get_map() -> MapResource:
 	return map
+
+func _process(delta):
+	render_race_path()
 	
+func render_race_path():
+	if run_path == null:
+		return
+	ig.clear()
+	ig.set_color(Color.red)
+	ig.begin(Mesh.PRIMITIVE_LINE_STRIP)
+	for pos in run_path.points:
+		pos = pos as Vector2
+		ig.add_vertex(Vector3(pos.x,3, pos.y))
+	ig.end()
+	
+
 func create_world() -> void:
+	print("create world", map.name)
 	var floor_mesh : CubeMesh = _floor.mesh
 	floor_mesh.size.x = map.width
 	floor_mesh.size.y = map.height
