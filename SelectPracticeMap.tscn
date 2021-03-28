@@ -123,8 +123,8 @@ resizable = true
 dialog_text = "Open Map File"
 mode = 0
 access = 2
-current_dir = "/home/ekjewin/src/justforfun/wall_ol"
-current_path = "/home/ekjewin/src/justforfun/wall_ol/"
+current_dir = "/Users/kjell/OneDrive/Documents/wall_ol"
+current_path = "/Users/kjell/OneDrive/Documents/wall_ol/"
 __meta__ = {
 "_edit_use_anchors_": false
 }

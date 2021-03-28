@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://map_renderer.gd" type="Script" id=1]
 [ext_resource path="res://maps/practice_001.tres" type="Resource" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://GroundTexture/Ground037_1K_Normal.jpg" type="Texture" id=4]
 [ext_resource path="res://GroundTexture/Ground037_1K_Roughness.jpg" type="Texture" id=5]
 [ext_resource path="res://GroundTexture/Ground037_1K_Color.jpg" type="Texture" id=6]
+[ext_resource path="res://test_race_path.tres" type="Resource" id=7]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 1, 0.3 )
@@ -25,10 +26,12 @@ uv1_triplanar = true
 
 [sub_resource type="SpatialMaterial" id=3]
 vertex_color_use_as_albedo = true
+albedo_color = Color( 1, 0, 0, 1 )
 
 [node name="MapRenderer" type="Spatial"]
 script = ExtResource( 1 )
 map = ExtResource( 2 )
+run_path = ExtResource( 7 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 10, 0 )

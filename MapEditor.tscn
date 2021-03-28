@@ -131,9 +131,10 @@ rect_min_size = Vector2( 500, 315 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 resizable = true
-current_dir = "res://maps"
-current_file = "new_map.tres"
-current_path = "res://maps/new_map.tres"
+access = 2
+current_dir = "/Users/kjell/OneDrive/Documents/wall_ol"
+current_file = "map.tres"
+current_path = "/Users/kjell/OneDrive/Documents/wall_ol/map.tres"
 
 [node name="OpenFileDialog" type="FileDialog" parent="."]
 anchor_left = 0.5
@@ -150,9 +151,10 @@ size_flags_vertical = 3
 window_title = "Open a File"
 resizable = true
 mode = 0
-current_dir = "res://maps"
-current_file = "new_map.tres"
-current_path = "res://maps/new_map.tres"
+access = 2
+current_dir = "/Users/kjell/OneDrive/Documents"
+current_file = "map.tres"
+current_path = "/Users/kjell/OneDrive/Documents/map.tres"
 __meta__ = {
 "_editor_description_": ""
 }
