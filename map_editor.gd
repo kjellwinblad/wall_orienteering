@@ -203,6 +203,7 @@ func rerender_map():
 	viewport.add_child(new_renderer)
 
 func _on_SaveFileDialog_file_selected(path):
+	map_renderer.get_map().update_hash()
 	map_renderer.get_map().save(path)
 	var save_dialog : FileDialog = find_node("SaveFileDialog")
 	save_dialog.update()

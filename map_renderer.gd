@@ -23,7 +23,9 @@ func set_map(init_map: MapResource):
 	map = init_map
 
 func _ready():
+	print("render paht", SceneSwitcher.get_param("race_path"))
 	if SceneSwitcher.get_param("race_path"):
+		print(SceneSwitcher.get_param("race_path").points)
 		run_path = SceneSwitcher.get_param("race_path")
 	if SceneSwitcher.get_param("map"):
 		map = SceneSwitcher.get_param("map")
@@ -39,8 +41,8 @@ func render_race_path():
 	if run_path == null:
 		return
 	ig.clear()
-	ig.set_color(Color.red)
 	ig.begin(Mesh.PRIMITIVE_LINE_STRIP)
+	ig.set_color(Color.red)
 	for pos in run_path.points:
 		pos = pos as Vector2
 		ig.add_vertex(Vector3(pos.x,3, pos.y))

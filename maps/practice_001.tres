@@ -11,3 +11,4 @@ controlls = [ Vector2( 1.4, 5.01667 ), Vector2( 4.85, 4.85 ), Vector2( 8.3, 4.08
 start_pos = Vector2( 1.73333, 1.55 )
 goal_pos = Vector2( 7.66667, 7.98334 )
 name = "Piece of Cake!"
+hash_value = "e7c370d839754caa6ec150cf0650fc7f"

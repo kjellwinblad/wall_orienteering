@@ -34,10 +34,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://race_path_resource.gd"
 }, {
+"base": "Control",
+"class": "ResultList",
+"language": "GDScript",
+"path": "res://result_list.gd"
+}, {
+"base": "VBoxContainer",
+"class": "ResultListItem",
+"language": "GDScript",
+"path": "res://result_list_item.gd"
+}, {
 "base": "WindowDialog",
 "class": "SetSizeDialog",
 "language": "GDScript",
 "path": "res://set_size_dialog.gd"
+}, {
+"base": "Control",
+"class": "UploadResult",
+"language": "GDScript",
+"path": "res://upload_result.gd"
 }, {
 "base": "Spatial",
 "class": "Wall",
@@ -50,7 +65,10 @@ _global_script_class_icons={
 "MapResource": "",
 "OControl": "",
 "RacePathResouce": "",
+"ResultList": "",
+"ResultListItem": "",
 "SetSizeDialog": "",
+"UploadResult": "",
 "Wall": ""
 }
 

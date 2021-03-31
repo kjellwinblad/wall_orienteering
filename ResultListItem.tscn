@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/architect-s-daughter/ArchitectsDaughter.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://result_list_item.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 19
@@ -20,6 +21,7 @@ margin_right = -1.0
 margin_bottom = 1.0
 size_flags_horizontal = 11
 size_flags_vertical = 11
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -48,7 +50,7 @@ size_flags_vertical = 12
 custom_fonts/font = SubResource( 2 )
 text = "Kjell Winblad"
 
-[node name="NumberLabel2" type="Label" parent="HBoxContainer"]
+[node name="TimeLabel" type="Label" parent="HBoxContainer"]
 margin_left = 964.0
 margin_top = 4.0
 margin_right = 1024.0

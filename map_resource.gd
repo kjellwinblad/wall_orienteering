@@ -11,6 +11,7 @@ export(Array, Vector2) var controlls = []
 export(Vector2) var start_pos:Vector2 = Vector2(3,3)
 export(Vector2) var goal_pos:Vector2 = Vector2(97,97)
 export(String) var name : String = "New Map"
+export(String) var hash_value : String = "not updated, should always be updated before a map is saved"
 
 func _init():
 	._init()
@@ -28,3 +29,18 @@ func add_control(pos: Vector2):
 func save(path:String):
 	print("Saveing", path)
 	ResourceSaver.save(path, self)
+
+func update_hash():
+	var strings: PoolStringArray = PoolStringArray()
+	strings.append(str(width))
+	strings.append(str(height))
+	for wall in walls:
+		strings.append(str(wall[0]))
+		strings.append(str(wall[1]))
+	for control in controlls:
+		strings.append(str(control[0]))
+	strings.append(str(start_pos))
+	strings.append(str(goal_pos))
+	strings.append(name)
+	var joined : String = strings.join(",")
+	hash_value = joined.md5_text()
