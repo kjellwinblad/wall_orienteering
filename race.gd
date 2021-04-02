@@ -40,9 +40,13 @@ func _input(event):
 	if event.is_action_pressed("show_map"):
 		$MapRenderer/Camera.current = true
 		$PlayerHolder/Player.visible = false
+		var light: DirectionalLight = $MapRenderer/DirectionalLight
+		light.shadow_enabled = false
 		find_node("InfoLabelCenterContainer").visible = false
 	if event.is_action_released("show_map"):
 		$PlayerHolder/Player/Camera2.current = true
+		var light: DirectionalLight = $MapRenderer/DirectionalLight
+		light.shadow_enabled = true
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		find_node("ExitRaceDialog").visible = true

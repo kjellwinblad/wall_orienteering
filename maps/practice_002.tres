@@ -11,4 +11,4 @@ controlls = [ Vector2( 27.7052, 19.6805 ), Vector2( 72.2222, 29.9201 ), Vector2(
 start_pos = Vector2( 3, 3 )
 goal_pos = Vector2( 97, 97 )
 name = "Walk in the park"
-hash_value = "7028491de0583a05f08dff0b4efd196e"
+hash_value = "7967c21d624c945dd22acfcfba6af834"

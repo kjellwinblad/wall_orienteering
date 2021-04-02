@@ -2,14 +2,9 @@ extends Resource
 
 class_name RacePathResouce
 
-export(Array, Vector2) var points = [Vector2(0,0)]
+export(Array, Vector2) var points
 
-export(Array, int) var times = []
-
-func _init():
-	points.clear()
-	times.clear()
-	._init()
+export(Array, int) var times 
 
 func add_point(time: float, location: Vector2):
 	points.append(location)
@@ -22,6 +17,8 @@ func to_json_string():
 		json_points.append(v.x)
 		json_points.append(v.y)
 	return JSON.print({"points": json_points, "times": times}, "", true)
+
+
 
 func from_json_string(string):
 	points = []

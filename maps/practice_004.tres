@@ -11,3 +11,4 @@ controlls = [ Vector2( 17.2222, 3.26389 ), Vector2( 21.6667, 38.5417 ), Vector2(
 start_pos = Vector2( 42.8622, 5.28194 )
 goal_pos = Vector2( 46.6453, 88.5796 )
 name = "Love is in the air"
+hash_value = "146e4c2888332ed30b374b9d020d4cdf"

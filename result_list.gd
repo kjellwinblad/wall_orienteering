@@ -4,8 +4,7 @@ class_name ResultList
 
 onready var result_list_conatiner: VBoxContainer = find_node("ResultListContainer")
 onready var http_request : HTTPRequest = find_node("HTTPRequest")
-const DOMAIN : String = "http://127.0.0.1:5000"
-const GET_RES_LIST_URL : String = DOMAIN + "/get_result_list/"
+var GET_RES_LIST_URL : String = Constants.DOMAIN + "/get_result_list/"
 var result_list_item_preload = preload("res:///ResultListItem.tscn")
 
 export(Resource) onready var map = map as MapResource 

@@ -11,3 +11,4 @@ controlls = [ Vector2( 34.3137, 40.6681 ), Vector2( 51.5977, 55.4103 ), Vector2(
 start_pos = Vector2( 21.024, 24.6914 )
 goal_pos = Vector2( 83.1881, 90.4139 )
 name = "Mei's Challange"
+hash_value = "257343ea65227cce2a48af20212beb78"

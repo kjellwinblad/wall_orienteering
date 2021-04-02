@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://practice_completed.gd" type="Script" id=1]
 [ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans.ttf" type="DynamicFontData" id=2]
@@ -16,8 +16,6 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=3]
 size = 28
 font_data = ExtResource( 2 )
-
-[sub_resource type="CubeMesh" id=4]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -37,11 +35,15 @@ __meta__ = {
 [node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
 margin_right = 1024.0
 margin_bottom = 60.0
+size_flags_horizontal = 11
+size_flags_vertical = 9
 
 [node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
 margin_left = 260.0
 margin_right = 763.0
 margin_bottom = 60.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
 custom_fonts/font = SubResource( 1 )
 text = "Practice Completed!"
 
@@ -68,6 +70,8 @@ text = "0:0:0"
 margin_top = 108.0
 margin_right = 1024.0
 margin_bottom = 147.0
+size_flags_horizontal = 11
+size_flags_vertical = 9
 
 [node name="UploadResultButton" type="Button" parent="VBoxContainer/CenterContainer2"]
 margin_left = 419.0
@@ -80,6 +84,8 @@ text = "Upload Result"
 margin_top = 151.0
 margin_right = 1024.0
 margin_bottom = 190.0
+size_flags_horizontal = 11
+size_flags_vertical = 9
 
 [node name="Button" type="Button" parent="VBoxContainer/CenterContainer3"]
 margin_left = 436.0
@@ -93,7 +99,7 @@ margin_top = 194.0
 margin_right = 1024.0
 margin_bottom = 600.0
 size_flags_horizontal = 11
-size_flags_vertical = 3
+size_flags_vertical = 11
 
 [node name="ViewportContainer" type="ViewportContainer" parent="VBoxContainer/ViewportCenterContainer"]
 margin_left = 462.0
@@ -101,8 +107,8 @@ margin_top = 153.0
 margin_right = 562.0
 margin_bottom = 253.0
 rect_min_size = Vector2( 100, 100 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 11
+size_flags_vertical = 11
 stretch = true
 
 [node name="Viewport" type="Viewport" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer"]
@@ -110,14 +116,6 @@ size = Vector2( 100, 100 )
 size_override_stretch = true
 handle_input_locally = false
 render_target_update_mode = 3
-
-[node name="Camera" type="Camera" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.19077 )
-
-[node name="MeshInstance" type="MeshInstance" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport"]
-transform = Transform( 0.786148, 0, -0.618038, -0.255334, 0.910669, -0.324786, 0.562828, 0.413136, 0.715921, 0, 0, 0 )
-mesh = SubResource( 4 )
-material/0 = null
 
 [node name="MapRenderer" parent="VBoxContainer/ViewportCenterContainer/ViewportContainer/Viewport" instance=ExtResource( 4 )]
 [connection signal="pressed" from="VBoxContainer/CenterContainer2/UploadResultButton" to="." method="_on_UploadResultButton_pressed"]

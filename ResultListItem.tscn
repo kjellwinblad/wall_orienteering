@@ -33,17 +33,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 30.0
+margin_bottom = 32.0
+custom_constants/margin_right = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="NumberLabel" type="Label" parent="HBoxContainer"]
+margin_left = 34.0
 margin_top = 4.0
-margin_right = 40.0
+margin_right = 74.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 40, 0 )
 custom_fonts/font = SubResource( 1 )
 text = "1."
 
 [node name="NameLabel" type="Label" parent="HBoxContainer"]
-margin_left = 44.0
-margin_right = 960.0
+margin_left = 78.0
+margin_right = 926.0
 margin_bottom = 32.0
 size_flags_horizontal = 11
 size_flags_vertical = 12
@@ -51,13 +60,22 @@ custom_fonts/font = SubResource( 2 )
 text = "Kjell Winblad"
 
 [node name="TimeLabel" type="Label" parent="HBoxContainer"]
-margin_left = 964.0
+margin_left = 930.0
 margin_top = 4.0
-margin_right = 1024.0
+margin_right = 990.0
 margin_bottom = 27.0
 rect_min_size = Vector2( 40, 0 )
 custom_fonts/font = SubResource( 1 )
 text = "01:32:0"
+
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 994.0
+margin_right = 1024.0
+margin_bottom = 32.0
+custom_constants/margin_right = 30
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HSeparator" type="HSeparator" parent="."]
 margin_top = 36.0

@@ -11,7 +11,7 @@ var race_path = null
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	print("COMPLETED", SceneSwitcher.get_param("race_path"), SceneSwitcher.get_param("race_path").points,  SceneSwitcher.get_param("what"),SceneSwitcher.get_param("what2"),SceneSwitcher.get_param("race_path").times)
+	#print("COMPLETED", SceneSwitcher.get_param("race_path"), SceneSwitcher.get_param("race_path").points,  SceneSwitcher.get_param("what"),SceneSwitcher.get_param("what2"),SceneSwitcher.get_param("race_path").times)
 	if SceneSwitcher.get_param("time"):
 		var time_string = HelperFuncs.elapsedTimeMicrosecondToTimeString(SceneSwitcher.get_param("time"))
 		time_label.text = time_string

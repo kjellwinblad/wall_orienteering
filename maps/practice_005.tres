@@ -11,3 +11,4 @@ controlls = [ Vector2( 27.1223, 16.0432 ), Vector2( 13.0935, 34.6763 ), Vector2(
 start_pos = Vector2( 3, 3 )
 goal_pos = Vector2( 92, 4 )
 name = "Rectangle Heaven"
+hash_value = "3b1425e6ee418f254f3dd49a1a50f315"

@@ -23,193 +23,214 @@ __meta__ = {
 }
 map = ExtResource( 5 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
-margin_right = 1024.0
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+margin_right = 60.0
+margin_bottom = 600.0
+custom_constants/margin_right = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 64.0
+margin_right = 960.0
+margin_bottom = 600.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
+margin_right = 896.0
 margin_bottom = 44.0
 
-[node name="Label" type="Label" parent="VBoxContainer/CenterContainer"]
-margin_left = 433.0
-margin_right = 591.0
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/CenterContainer"]
+margin_left = 369.0
+margin_right = 527.0
 margin_bottom = 44.0
 custom_fonts/font = SubResource( 1 )
 text = "Result List"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 48.0
-margin_right = 1024.0
+margin_right = 896.0
 margin_bottom = 542.0
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="ResultListContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
-margin_right = 1012.0
+[node name="ResultListContainer" type="VBoxContainer" parent="HBoxContainer/VBoxContainer/ScrollContainer"]
+margin_right = 884.0
 margin_bottom = 788.0
 size_flags_horizontal = 11
 size_flags_vertical = 9
 
-[node name="Control4" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control4" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 0.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 40.0
 
-[node name="Control" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 44.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 84.0
 
-[node name="Control5" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control5" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 88.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 128.0
 
-[node name="Control6" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control6" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 132.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 172.0
 
-[node name="Control7" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control7" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 176.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 216.0
 
-[node name="Control8" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control8" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 220.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 260.0
 
-[node name="Control9" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control9" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 264.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 304.0
 
-[node name="Control10" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control10" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 308.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 348.0
 
-[node name="Control11" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control11" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 352.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 392.0
 
-[node name="Control12" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control12" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 396.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 436.0
 
-[node name="Control13" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control13" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 440.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 480.0
 
-[node name="Control14" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control14" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 484.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 524.0
 
-[node name="Control15" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control15" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 528.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 568.0
 
-[node name="Control16" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control16" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 572.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 612.0
 
-[node name="Control17" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control17" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 616.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 656.0
 
-[node name="Control18" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control18" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 660.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 700.0
 
-[node name="Control2" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control2" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 704.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 744.0
 
-[node name="Control3" parent="VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
+[node name="Control3" parent="HBoxContainer/VBoxContainer/ScrollContainer/ResultListContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 0.0
 margin_top = 748.0
-margin_right = 1012.0
+margin_right = 884.0
 margin_bottom = 788.0
 
-[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+[node name="CenterContainer2" type="CenterContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 546.0
-margin_right = 1024.0
+margin_right = 896.0
 margin_bottom = 600.0
 
-[node name="Button" type="Button" parent="VBoxContainer/CenterContainer2"]
-margin_left = 459.0
-margin_right = 564.0
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer/CenterContainer2"]
+margin_left = 395.0
+margin_right = 500.0
 margin_bottom = 54.0
 custom_fonts/font = SubResource( 2 )
 text = "Back"
 
+[node name="MarginContainer2" type="MarginContainer" parent="HBoxContainer"]
+margin_left = 964.0
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_right = 60
+
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-[connection signal="pressed" from="VBoxContainer/CenterContainer2/Button" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/CenterContainer2/Button" to="." method="_on_Button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]

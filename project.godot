@@ -83,6 +83,7 @@ config/icon="res://icon.png"
 SceneSwitcher="*res://scene_switcher.gd"
 MapGetter="*res://map_getter.gd"
 HelperFuncs="*res://helper_funcs.gd"
+Constants="*res://constants.gd"
 
 [input]
 

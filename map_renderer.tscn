@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://map_renderer.gd" type="Script" id=1]
 [ext_resource path="res://maps/practice_001.tres" type="Resource" id=2]
@@ -6,7 +6,6 @@
 [ext_resource path="res://GroundTexture/Ground037_1K_Normal.jpg" type="Texture" id=4]
 [ext_resource path="res://GroundTexture/Ground037_1K_Roughness.jpg" type="Texture" id=5]
 [ext_resource path="res://GroundTexture/Ground037_1K_Color.jpg" type="Texture" id=6]
-[ext_resource path="res://test_race_path.tres" type="Resource" id=7]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 1, 1, 0.3 )
@@ -31,7 +30,6 @@ albedo_color = Color( 1, 0, 0, 1 )
 [node name="MapRenderer" type="Spatial"]
 script = ExtResource( 1 )
 map = ExtResource( 2 )
-run_path = ExtResource( 7 )
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 10, 0 )
@@ -53,8 +51,15 @@ material/0 = SubResource( 2 )
 
 [node name="DirectionalLight" type="DirectionalLight" parent="."]
 transform = Transform( 0.703506, -0.649207, -0.289154, 0, -0.406864, 0.913489, -0.710689, -0.642645, -0.286231, 0, 14.3837, -7.42455 )
-shadow_bias = 0.05
-shadow_contact = 0.32
+shadow_enabled = true
+directional_shadow_mode = 1
+directional_shadow_split_1 = 0.363
+directional_shadow_split_2 = 0.534
+directional_shadow_split_3 = 0.747
+directional_shadow_blend_splits = true
+directional_shadow_normal_bias = 0.0
+directional_shadow_bias_split_scale = 0.0
+directional_shadow_max_distance = 1000.0
 
 [node name="ImmediateGeometry" type="ImmediateGeometry" parent="."]
 material_override = SubResource( 3 )

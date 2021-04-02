@@ -11,3 +11,4 @@ controlls = [ Vector2( 9.96528, 31.7917 ), Vector2( 38.6458, 37.7708 ), Vector2(
 start_pos = Vector2( 3, 3 )
 goal_pos = Vector2( 62.4167, 3.0625 )
 name = "Strange City"
+hash_value = "8c49d68bff425547f04d50e374103ff7"
