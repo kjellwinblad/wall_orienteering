@@ -43,3 +43,11 @@ func _on_UploadResultButton_pressed():
 	 "map": SceneSwitcher.get_param("map"),
 	 "race_path": SceneSwitcher.get_param("race_path"),
 	 "back_scene":  "res://PracticeCompleted.tscn"})
+
+
+func _on_ViewResultsButton_pressed():
+	SceneSwitcher.change_scene("res://ResultList.tscn", 
+		{"time": SceneSwitcher.get_param("time"),
+		"race_path": SceneSwitcher.get_param("race_path"),
+		"map": SceneSwitcher.get_param("map"),
+		"back_scene":  "res://PracticeCompleted.tscn"})

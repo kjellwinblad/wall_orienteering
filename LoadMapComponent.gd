@@ -10,7 +10,7 @@ func _ready():
 	button.connect("pressed", self, "load_map")
 
 func load_map():
-	SceneSwitcher.change_scene("res://Race.tscn", {"map": map})
+	SceneSwitcher.change_scene("res://PracticeIntro.tscn", {"map": map})
 
 func set_map(map_parm: MapResource):
 	map = map_parm

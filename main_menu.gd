@@ -5,7 +5,7 @@ onready var map_editor_scene = preload("res://MapEditor.tscn")
 
 func _ready():
 	get_viewport().connect("size_changed", self, "on_size_changed")
-	#OS.window_fullscreen = true
+	OS.window_fullscreen = true
 
 
 func _on_PlayButton_pressed():

@@ -1,0 +1,285 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/architect-s-daughter/ArchitectsDaughter.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans-Bold.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://godot_fontpack/Godot-Fontpack-master/fonts/droid-sans/DroidSans.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://PracticeIntro.gd" type="Script" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 54
+font_data = ExtResource( 1 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 43
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 73
+font_data = ExtResource( 1 )
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer3" type="CenterContainer" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 94.0
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer/CenterContainer3"]
+margin_left = 190.0
+margin_right = 834.0
+margin_bottom = 94.0
+custom_fonts/font = SubResource( 1 )
+text = "Map: Peace of Cake"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 98.0
+margin_right = 1024.0
+margin_bottom = 600.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/HBoxContainer"]
+margin_right = 665.0
+margin_bottom = 502.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/CenterContainer"]
+margin_top = 6.0
+margin_right = 665.0
+margin_bottom = 495.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer16" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_right = 665.0
+margin_bottom = 51.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer16"]
+margin_left = 244.0
+margin_right = 421.0
+margin_bottom = 51.0
+custom_fonts/font = SubResource( 2 )
+text = "Controls"
+
+[node name="CenterContainer5" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 55.0
+margin_right = 665.0
+margin_bottom = 91.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer5"]
+margin_left = 259.0
+margin_right = 406.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Show Map"
+
+[node name="CenterContainer4" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 95.0
+margin_right = 665.0
+margin_bottom = 124.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer4"]
+margin_left = 298.0
+margin_right = 366.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "SPACE"
+
+[node name="CenterContainer14" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 128.0
+margin_right = 665.0
+margin_bottom = 164.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer14"]
+margin_left = 102.0
+margin_right = 562.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Turn/Look in different direction"
+
+[node name="CenterContainer15" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 168.0
+margin_right = 665.0
+margin_bottom = 197.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer15"]
+margin_right = 665.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "Use the mouse or arrow keys \"<-\" and \"->\" to turn left or right"
+
+[node name="CenterContainer6" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 201.0
+margin_right = 665.0
+margin_bottom = 237.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer6"]
+margin_left = 232.0
+margin_right = 433.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Move forward"
+
+[node name="CenterContainer7" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 241.0
+margin_right = 665.0
+margin_bottom = 270.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer7"]
+margin_left = 233.0
+margin_right = 432.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "W or up arrow key"
+
+[node name="CenterContainer8" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 274.0
+margin_right = 665.0
+margin_bottom = 310.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer8"]
+margin_left = 219.0
+margin_right = 445.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Move backward"
+
+[node name="CenterContainer9" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 314.0
+margin_right = 665.0
+margin_bottom = 343.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer9"]
+margin_left = 221.0
+margin_right = 443.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "S or down arrow key"
+
+[node name="CenterContainer10" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 347.0
+margin_right = 665.0
+margin_bottom = 383.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer10"]
+margin_left = 264.0
+margin_right = 400.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Move left"
+
+[node name="CenterContainer11" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 387.0
+margin_right = 665.0
+margin_bottom = 416.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer11"]
+margin_left = 325.0
+margin_right = 340.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "A"
+
+[node name="CenterContainer12" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 420.0
+margin_right = 665.0
+margin_bottom = 456.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer12"]
+margin_left = 254.0
+margin_right = 410.0
+margin_bottom = 36.0
+custom_fonts/font = SubResource( 3 )
+text = "Move right"
+
+[node name="CenterContainer13" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer"]
+margin_top = 460.0
+margin_right = 665.0
+margin_bottom = 489.0
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/CenterContainer/VBoxContainer/CenterContainer13"]
+margin_left = 324.0
+margin_right = 340.0
+margin_bottom = 29.0
+custom_fonts/font = SubResource( 4 )
+text = "D"
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer/HBoxContainer"]
+margin_left = 669.0
+margin_right = 1024.0
+margin_bottom = 502.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/CenterContainer2"]
+margin_left = 52.0
+margin_top = 161.0
+margin_right = 302.0
+margin_bottom = 341.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
+
+[node name="StartButton" type="Button" parent="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 132.0
+custom_fonts/font = SubResource( 5 )
+text = "Start!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer17" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 136.0
+margin_right = 250.0
+margin_bottom = 156.0
+
+[node name="ResultsButton" type="Button" parent="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer/CenterContainer17"]
+margin_left = 95.0
+margin_right = 154.0
+margin_bottom = 20.0
+text = "Results"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer18" type="CenterContainer" parent="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer"]
+margin_top = 160.0
+margin_right = 250.0
+margin_bottom = 180.0
+
+[node name="Back" type="Button" parent="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer/CenterContainer18"]
+margin_left = 104.0
+margin_right = 146.0
+margin_bottom = 20.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer/CenterContainer17/ResultsButton" to="." method="_on_ResultsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/CenterContainer2/VBoxContainer/CenterContainer18/Back" to="." method="_on_Back_pressed"]

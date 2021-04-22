@@ -32,4 +32,4 @@ func _on_FileDialog_file_selected(path):
 		find_node("IncorrectMapDialog").visible = true
 	else:
 		loaded_map = loaded_map as MapResource
-		SceneSwitcher.change_scene("res://Race.tscn", {"map": loaded_map})
+		SceneSwitcher.change_scene("res://PracticeIntro.tscn", {"map": loaded_map})

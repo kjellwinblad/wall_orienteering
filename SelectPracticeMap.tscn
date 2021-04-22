@@ -33,8 +33,8 @@ expand = true
 [node name="CenterContainer" type="CenterContainer" parent="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 1.0
-margin_bottom = 1.0
+size_flags_horizontal = 11
+size_flags_vertical = 11
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,6 +44,8 @@ margin_left = 112.0
 margin_top = 30.0
 margin_right = 912.0
 margin_bottom = 570.0
+size_flags_horizontal = 3
+size_flags_vertical = 11
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -52,6 +54,8 @@ __meta__ = {
 margin_right = 800.0
 margin_bottom = 400.0
 rect_min_size = Vector2( 800, 400 )
+size_flags_horizontal = 11
+size_flags_vertical = 11
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -59,8 +63,8 @@ __meta__ = {
 [node name="MapListContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer/ScrollContainer"]
 margin_right = 800.0
 margin_bottom = 400.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+size_flags_horizontal = 11
+size_flags_vertical = 11
 
 [node name="HSeparator" type="HSeparator" parent="Control/CenterContainer/VBoxContainer"]
 margin_top = 404.0
