@@ -25,12 +25,10 @@ material/0 = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00346398, 2.97301, 0.00911808 )
 cast_shadow = 0
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 visible = false
 mesh = SubResource( 3 )
-material/0 = null
 
 [node name="Camera" type="Camera" parent="MeshInstance"]
 transform = Transform( 0.668664, 0, 0.743565, 0, 1, 0, -0.743565, 0, 0.668664, 4.55367, 2.36118, 4.5892 )

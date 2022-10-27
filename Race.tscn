@@ -132,6 +132,7 @@ autostart = true
 [node name="StorePathTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
 [connection signal="pressed" from="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer/ExitRaceButton" to="Control/ExitRaceDialog" method="_on_ExitRaceButton_pressed"]
 [connection signal="pressed" from="Control/ExitRaceDialog/PanelContainer/VBoxContainer/CenterContainer/HBoxContainer/CancelExitRaceButton" to="." method="_on_CancelExitRaceButton_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

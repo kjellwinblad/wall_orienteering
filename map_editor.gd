@@ -192,6 +192,7 @@ func handle_add_control_click(mouse_event:InputEventMouseButton):
 	rerender_map()
 
 func rerender_map():
+	entered_item = null
 	var new_renderer = map_renderer_scene.instance()
 	new_renderer.set_map(map_renderer.get_map())
 	var old_renderer = map_renderer

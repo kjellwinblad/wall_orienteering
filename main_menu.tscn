@@ -75,6 +75,7 @@ text = "Exit"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/PlayButton" to="." method="_on_PlayButton_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/CreateNewMapButton" to="." method="_on_CreateNewMapButton_pressed"]
 [connection signal="pressed" from="Control/CenterContainer/VBoxContainer/ExitButton" to="." method="_on_ExitButton_pressed"]

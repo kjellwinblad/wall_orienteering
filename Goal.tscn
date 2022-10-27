@@ -24,4 +24,5 @@ collision_mask = 2
 [node name="CollisionShape" type="CollisionShape" parent="Area"]
 transform = Transform( 1, 0, 0, 0, 2.63062, 0, 0, 0, 1, 0, -0.431475, 0 )
 shape = SubResource( 3 )
+
 [connection signal="body_entered" from="Area" to="." method="_on_Area_body_entered"]
