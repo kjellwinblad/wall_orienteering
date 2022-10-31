@@ -4,9 +4,9 @@ var map : MapResource = null setget set_map
 onready var button : Button = $Button
 
 func _ready():
-	print(button)
 	if map:
 		button.text = map.name
+	# warning-ignore:return_value_discarded
 	button.connect("pressed", self, "load_map")
 
 func load_map():

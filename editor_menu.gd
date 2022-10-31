@@ -33,12 +33,6 @@ func _ready():
 	popup.add_item("Set Goal", MenuItemId.SET_GOAL_MODE)
 	popup.add_separator()
 	popup.add_item("Add Wall Mode (Ctrl+W)", MenuItemId.ADD_WALL)
-	#var hotkey : InputEventKey = InputEventKey.new()
-	#print(hotkey)
-	#hotkey.scancode = KEY_W
-	#var shortcut = ShortCut.new()
-	#shortcut.set_shortcut(hotkey)
-	popup.add_shortcut(shortcut,MenuItemId.ADD_WALL, true)
 	popup.add_item("Add Control Mode (Ctrl+E)", MenuItemId.ADD_CONTROL)
 	popup.add_separator()
 	popup.add_item("Remove Mode (Ctrl+R)", MenuItemId.DELETE_MODE)
@@ -50,7 +44,9 @@ func _ready():
 	popup.set_item_checked(MenuItemId.SNAP_TO_METERS, snap_to_meters)
 	popup.add_separator()
 	popup.add_item("Exit to Main Menu", MenuItemId.TO_MAIN_MENU)
-	popup.connect("id_pressed", self, "_on_item_pressed")
+	var err = popup.connect("id_pressed", self, "_on_item_pressed")
+	if err != OK:
+		print("error popup.connect(id_pressed")
 
 func _on_item_pressed(id):
 	var popup : PopupMenu = get_popup()

@@ -22,8 +22,12 @@ func _ready():
 	map_face.size = Vector2(size_on_map, size_on_map)
 	marker.create_trimesh_collision()
 	var marker_static_body : StaticBody = marker.get_child(0)
-	marker_static_body.connect("mouse_entered", self, "_mouse_entered")
-	marker_static_body.connect("mouse_exited", self, "_mouse_exited")
+	var err = marker_static_body.connect("mouse_entered", self, "_mouse_entered")
+	if err != OK:
+		print("marker_static_body.connect(mouse_entered)")
+	err = marker_static_body.connect("mouse_exited", self, "_mouse_exited")
+	if err != OK:
+		print("marker_static_body.connect(mouse_exited)")
 
 func _mouse_entered():
 	marker.material_override = mouse_hover_material
@@ -32,7 +36,7 @@ func _mouse_exited():
 	marker.material_override = control_material
 
 
-func _on_Area_body_entered(body):
+func _on_Area_body_entered(_body):
 	find_node("MapFaceTaken").visible = true
 	emit_signal("player_hit_control", control_index)
 	beep_player.play()

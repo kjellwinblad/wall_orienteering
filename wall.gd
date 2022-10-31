@@ -23,8 +23,12 @@ func _ready():
 	main_wall.create_trimesh_collision()
 	wall_marker.create_trimesh_collision()
 	var marker_static_body : StaticBody = wall_marker.get_child(0)
-	marker_static_body.connect("mouse_entered", self, "_mouse_entered")
-	marker_static_body.connect("mouse_exited", self, "_mouse_exited")
+	var err = marker_static_body.connect("mouse_entered", self, "_mouse_entered")
+	if err != OK:
+		print("Failure! marker_static_body.connect mouse_entered")
+	err = marker_static_body.connect("mouse_exited", self, "_mouse_exited")
+	if err != OK:
+		print("Failure! marker_static_body.connect mouse_exited")
 	wall_marker.material_override = normal_show_material
 
 func _mouse_entered():

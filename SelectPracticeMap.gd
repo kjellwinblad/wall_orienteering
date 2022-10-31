@@ -3,12 +3,10 @@ extends CanvasLayer
 onready var open_from_file_dialog : FileDialog = find_node("FileDialog")
 
 func _ready():
-	var base_load_map_component = find_node("LoadMapComponent")
 	var map_resources : Array = MapGetter.get_practce_maps()
 	var map_list_container : Node = find_node("MapListContainer")
 	for r in map_resources:
 		var map_resource : MapResource = r
-		print(r, r is MapResource)
 		var load_map_component = find_node("LoadMapComponent").duplicate()
 		load_map_component.map = map_resource
 		load_map_component.visible = true
@@ -18,6 +16,7 @@ func _ready():
 
 func _on_Back_pressed():
 	self.queue_free()
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://main_menu.tscn")
 
 

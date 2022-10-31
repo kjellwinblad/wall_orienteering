@@ -23,9 +23,7 @@ func set_map(init_map: MapResource):
 	map = init_map
 
 func _ready():
-	print("render paht", SceneSwitcher.get_param("race_path"))
 	if SceneSwitcher.get_param("race_path"):
-		print(SceneSwitcher.get_param("race_path").points)
 		run_path = SceneSwitcher.get_param("race_path")
 	if SceneSwitcher.get_param("map"):
 		map = SceneSwitcher.get_param("map")
@@ -34,7 +32,7 @@ func _ready():
 func get_map() -> MapResource:
 	return map
 
-func _process(delta):
+func _process(_delta):
 	render_race_path()
 	
 func render_race_path():
@@ -50,17 +48,14 @@ func render_race_path():
 	
 
 func create_world() -> void:
-	print("create world", map.name)
 	var floor_mesh : CubeMesh = _floor.mesh
 	floor_mesh.size.x = map.width
 	floor_mesh.size.y = map.height
-	#_floor.create_trimesh_collision()
 	_floor.translate(Vector3(map.width/2, -map.height/2, 0))
 	_floor.create_trimesh_collision()
 	var wall_maker_width : float = max(0.1, max(map.width, map.height)/200)
 	var control_marker_with : float = max(0.1, max(map.width, map.height)/20)
 	var index := 0
-	print("walls", map.walls, map.controlls)
 	for wall_cords in map.walls:
 		var start: Vector2 = wall_cords[0]
 		var end: Vector2 = wall_cords[1]	
@@ -68,18 +63,12 @@ func create_world() -> void:
 		var wall_length = (wall_cords[0] - wall_cords[1]).length()
 		wall.length = wall_length
 		wall.marker_width = wall_maker_width
-		var angle = (start-end).angle_to(Vector2.RIGHT)
-		#wall.global_transform.origin = Vector3(start.x,0,start.y)
 		wall.look_at_from_position(Vector3(start.x,0, start.y),Vector3(end.x,0, end.y), Vector3.UP)
 		wall.translate_object_local(Vector3(0,0,-wall_length/2))
-		#wall.translate(Vector3(wall_length / 2,0,0))
-		#wall.translate(Vector3(-wall_cords[0].x,0,-wall_cords[0].y))
 		wall.wall_index = index
 		index += 1
 		add_child(wall)
-		print(wall is Wall, wall.name)
 	index = 0
-	print(map.controlls)
 	for control_point in map.controlls:
 		control_point = control_point as Vector2
 		var control:OControl  = control_scene.instance()
@@ -87,7 +76,9 @@ func create_world() -> void:
 		control.transform.origin = Vector3(control_point.x,0, control_point.y)
 		control.control_index = index
 		index += 1
-		control.connect("player_hit_control", self, "player_hit_control")
+		var err = control.connect("player_hit_control", self, "player_hit_control")
+		if err != OK:
+			print("error control.connect(player_hit_control")
 		add_child(control)
 	var goal = goal_scene.instance()
 	goal.transform.origin = Vector3(map.goal_pos.x,0, map.goal_pos.y)
@@ -101,7 +92,6 @@ func create_world() -> void:
 	camera.translate(Vector3(map.width/2, -map.height/2, 0))
 
 func player_hit_control(index: int):
-	print(index)
 	emit_signal("player_hit_control", index)
 
 func player_entered_goal():

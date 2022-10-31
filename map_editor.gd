@@ -28,11 +28,14 @@ onready var viewport_center_container = find_node("ViewportCenterContainer")
 onready var viewport_container = find_node("ViewportContainer")
 
 func _ready():
-	editor_menu.connect("id_pressed", self, "_on_menu_select")
-	editor_menu.connect("mouse_entered", self, "_on_menu_entered")
+	var err = editor_menu.connect("id_pressed", self, "_on_menu_select")
+	if err != OK:
+		print("error editor_menu.connect(id_pressed)")
+	err =  editor_menu.connect("mouse_entered", self, "_on_menu_entered")
+	if err != OK:
+		print("error editor_menu.connect(mouse_entered)")
 	if SceneSwitcher.get_param("map"):
 		map_renderer.set_map(SceneSwitcher.get_param("map"))
-	print(viewport_center_container.rect_size)
 	viewport.size = viewport_center_container.rect_size
 	viewport_container.rect_size = viewport_center_container.rect_size
 	viewport_container.rect_min_size = viewport_center_container.rect_size
@@ -78,7 +81,9 @@ func _on_menu_select(id):
 		help_label.text = "[Set Goal Location Mode] Click to select goal location"
 		return
 	if id == editor_menu.MenuItemId.TO_MAIN_MENU:
-		get_tree().change_scene("res://main_menu.tscn")
+		var err = get_tree().change_scene("res://main_menu.tscn")
+		if err != OK:
+			print("error get_tree().change_scene(res://main_menu.tscn)")
 		self.queue_free()
 	help_label.text = ""
 
@@ -103,7 +108,7 @@ func _input(event):
 	if Input.is_action_just_pressed("delete"):
 		editor_menu.emit_signal("id_pressed", editor_menu.MenuItemId.DELETE_MODE)
 
-func handle_mouse_motion_event(mouse_event:InputEventMouseMotion):
+func handle_mouse_motion_event(_mouse_event:InputEventMouseMotion):
 	var dropPlane  = Plane(Vector3(0,0,0), Vector3(10,0,0), Vector3(10,0,10))
 	var mouse_pos_map_viewport = viewport.get_mouse_position()
 	var mousePosition3D = dropPlane.intersects_ray(
@@ -149,23 +154,20 @@ func handle_mouse_click_event(mouse_event:InputEventMouseButton):
 		if state == EditorState.SET_GOAL_STATE:
 			handle_change_goal_click(mouse_event)
 
-func handle_change_start_click(mouse_event:InputEventMouseButton):
+func handle_change_start_click(_mouse_event:InputEventMouseButton):
 	map_renderer.get_map().start_pos = _mouse_pos
 	rerender_map()
 
-func handle_change_goal_click(mouse_event:InputEventMouseButton):
+func handle_change_goal_click(_mouse_event:InputEventMouseButton):
 	map_renderer.get_map().goal_pos = _mouse_pos
 	rerender_map()
 
-func handle_delete_click(mouse_event:InputEventMouseButton) -> void:
+func handle_delete_click(_mouse_event:InputEventMouseButton) -> void:
 	var collider = _ray_cast.get_collider()
-	print("colider", collider)
 	if collider:
 		var curr: Node = collider
 		while curr != null and not (curr is Wall or curr is OControl):
-			print(curr.get_class())
 			curr = curr.get_parent()
-		print(curr, curr is OControl)
 		if curr == null:
 			return
 		var item = curr
@@ -179,7 +181,7 @@ func handle_delete_click(mouse_event:InputEventMouseButton) -> void:
 			controls.remove(control.control_index)
 		rerender_map()	
 
-func handle_add_wall_click(mouse_event:InputEventMouseButton):
+func handle_add_wall_click(_mouse_event:InputEventMouseButton):
 	if _click_one == Vector2.INF:
 		_click_one = _mouse_pos
 	else:
@@ -187,7 +189,7 @@ func handle_add_wall_click(mouse_event:InputEventMouseButton):
 		_click_one = Vector2.INF
 		rerender_map()
 
-func handle_add_control_click(mouse_event:InputEventMouseButton):
+func handle_add_control_click(_mouse_event:InputEventMouseButton):
 	map_renderer.get_map().add_control(_mouse_pos)
 	rerender_map()
 
@@ -199,9 +201,9 @@ func rerender_map():
 	old_renderer.queue_free()
 	map_renderer = new_renderer
 	camera = map_renderer.get_node("Camera")
-	print("before add", map_renderer.map.name)
-	map_renderer.get_map().connect("changed", self, "rerender_map")
 	viewport.add_child(new_renderer)
+	map_renderer.get_map().connect("changed", self, "rerender_map")
+	
 
 func _on_SaveFileDialog_file_selected(path):
 	map_renderer.get_map().update_hash()
@@ -215,7 +217,6 @@ func _on_OpenFileDialog_file_selected(path):
 	var map_resource = load(path)
 	if map_resource is MapResource:
 		map_renderer.map = map_resource
-		print("rerender", map_renderer.map.name)
 		rerender_map()
 	else:
 		find_node("IncorrectMapFileDialog").popup()
@@ -225,4 +226,3 @@ func _on_ViewportCenterContainer_resized():
 	viewport.size = viewport_center_container.rect_size
 	viewport_container.rect_size = viewport_center_container.rect_size
 	viewport_container.rect_min_size = viewport_center_container.rect_size
-	print("changed_size", viewport_center_container.rect_size)

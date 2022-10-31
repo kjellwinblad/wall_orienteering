@@ -6,7 +6,9 @@ var _params = null
 # Call this instead to be able to provide arguments to the next scene
 func change_scene(next_scene, params=null):
 	_params = params
-	get_tree().change_scene(next_scene)
+	var err = get_tree().change_scene(next_scene)
+	if err != OK:
+		print("change_scene error")
 
 # In the newly opened scene, you can get the parameters by name
 func get_param(name):

@@ -18,4 +18,5 @@ func _on_ResultsButton_pressed():
 
 func _on_Back_pressed():
 	self.queue_free()
+	# warning-ignore:return_value_discarded
 	get_tree().change_scene("res://SelectPracticeMap.tscn")

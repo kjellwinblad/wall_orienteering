@@ -11,7 +11,6 @@ var race_path = null
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	#print("COMPLETED", SceneSwitcher.get_param("race_path"), SceneSwitcher.get_param("race_path").points,  SceneSwitcher.get_param("what"),SceneSwitcher.get_param("what2"),SceneSwitcher.get_param("race_path").times)
 	if SceneSwitcher.get_param("time"):
 		var time_string = HelperFuncs.elapsedTimeMicrosecondToTimeString(SceneSwitcher.get_param("time"))
 		time_label.text = time_string
@@ -21,7 +20,6 @@ func _ready():
 		race_path = SceneSwitcher.get_param("race_path")
 	yield(get_tree(), "idle_frame")
 	yield(get_tree(), "idle_frame")
-	print(viewport_center_container.rect_size)
 	viewport.size = viewport_center_container.rect_size
 	viewport_container.rect_size = viewport_center_container.rect_size
 	viewport_container.rect_min_size = viewport_center_container.rect_size
@@ -34,7 +32,6 @@ func _on_ViewportCenterContainer_resized():
 	viewport.size = viewport_center_container.rect_size
 	viewport_container.rect_size = viewport_center_container.rect_size
 	viewport_container.rect_min_size = viewport_center_container.rect_size
-	print("changed_size", viewport_center_container.rect_size)
 
 
 func _on_UploadResultButton_pressed():

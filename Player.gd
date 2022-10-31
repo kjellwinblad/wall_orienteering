@@ -1,10 +1,11 @@
 extends KinematicBody
 
 var speed : Vector3 = Vector3(0,0,0)
-const jump_speed : int = 7
+const jump_speed : int = 1
 const gravity : float = 9.8
 const turn_speed : float = 3.0
 const forward_speed: float = 8.0
+# warning-ignore:export_hint_type_mistmatch
 export(float) var mouse_sensetivity = 20000
 
 onready var run_sound_player = $AudioStreamPlayer
@@ -31,14 +32,6 @@ func look(event : InputEvent):
 
 func _physics_process(delta):
 	var direction : Vector3 = Vector3(0,0,0)
-	if Input.is_action_pressed("move_north"):
-		direction.z -= 1
-	if Input.is_action_pressed("move_south"):
-		direction.z += 1
-	if Input.is_action_pressed("move_west"):
-		direction.x -= 1
-	if Input.is_action_pressed("move_east"):
-		direction.x += 1
 	if Input.is_action_pressed("turn_left"):
 		rotate_y(turn_speed*delta)
 	if Input.is_action_pressed("turn_right"):
@@ -69,6 +62,7 @@ func _physics_process(delta):
 		if is_playing_run_sound:
 			is_playing_run_sound = false
 			run_sound_player.stop()
+	# warning-ignore:return_value_discarded
 	move_and_slide(direction, Vector3.UP)
 
 

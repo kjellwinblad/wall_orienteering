@@ -25,7 +25,9 @@ func _ready():
 		controls.append(false)
 	$PlayerHolder/Player/Camera2.current = true
 	var start : Vector2 = map_render.get_map().start_pos
+	# warning-ignore:return_value_discarded
 	map_render.connect("player_hit_control", self, "punched_control")
+	# warning-ignore:return_value_discarded
 	map_render.connect("player_hit_goal", self, "entered_goal")
 	$PlayerHolder.translation = (Vector3(start.x, 0, start.y))
 
@@ -52,7 +54,7 @@ func _input(event):
 		find_node("ExitRaceDialog").visible = true
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player.global_transform.origin.y < -55:
 		player.transform.origin = Vector3(0,10,0)
 

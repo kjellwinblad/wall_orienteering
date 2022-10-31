@@ -27,8 +27,9 @@ func add_control(pos: Vector2):
 	emit_signal("changed")
 
 func save(path:String):
-	print("Saveing", path)
-	ResourceSaver.save(path, self)
+	var err = ResourceSaver.save(path, self)
+	if err != OK:
+		print("error ResourceSaver.save(path, self)")
 
 func update_hash():
 	var strings: PoolStringArray = PoolStringArray()

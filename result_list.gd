@@ -19,7 +19,6 @@ func get_res_list_url():
 
 
 func load_from_internet():
-	print("SENDING REQUEST")
 	http_request.request(get_res_list_url(), ["user-agent: wall_orientering"])
 
 static func delete_children(node):
